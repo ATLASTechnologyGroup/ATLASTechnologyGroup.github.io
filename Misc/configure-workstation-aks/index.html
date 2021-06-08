@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Steps to Configure Workstation for Azure Kubernetes (AKS) - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Conventions/api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li class="active">
+    <a href="./">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../../Conventions/python-coding-conventions/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../distributed-architecture-strategy/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#steps-to-configure-workstation-for-azure-kubernetes-aks">Steps to Configure Workstation for Azure Kubernetes (AKS)</a></li>
+            <li><a href="#table-of-contents">Table of Contents</a></li>
+            <li><a href="#prerequisites">Prerequisites</a></li>
+            <li><a href="#acquiring-the-tools">Acquiring the Tools</a></li>
+            <li><a href="#configuring-kubectl-for-an-aks-cluster">Configuring kubectl for an AKS Cluster</a></li>
+            <li><a href="#configuring-for-azure-container-registry">Configuring for Azure Container Registry</a></li>
+            <li><a href="#other-tools">Other Tools</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#useful-resources">Useful Resources</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="steps-to-configure-workstation-for-azure-kubernetes-aks">Steps to Configure Workstation for Azure Kubernetes (AKS)</h1>
+<p>This document will instruct you on how to configure your workstation to access Azure Kubernetes clusters (AKS) and Azure Container Registry.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#acquiring-the-tools">Acquiring the Tools</a></li>
+<li><a href="#configuring-kubectl-for-an-aks-cluster">Configuring <code>kubectl</code> for an AKS Cluster</a></li>
+<li><a href="#configuring-for-azure-container-registry">Configuring for Azure Container Registry</a></li>
+<li><a href="#other-tools">Other Tools</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#useful-resources">Useful Resources</a></li>
+</ol>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Any of the three major operating systems (Windows, Mac, Linux) will work great with the Azure CLI and <code>kubectl</code>, however:<ul>
+<li>All of the Linux steps in this document were tested on Ubuntu 18.04.</li>
+<li>All of the Windows steps were tested on Windows 10 20H2.</li>
+<li>MacOS has not been tested, so steps are not included for that OS.</li>
+</ul>
+</li>
+<li>You&rsquo;ll need some kind of Linux environment for development/testing of containerized code.<ul>
+<li>If your primary OS is Windows, here are some options:<ul>
+<li>On Windows, the Windows Subsystem for Linux 2 (WSL 2) is recommended.</li>
+<li>A Linux VM is usually a solid option.</li>
+<li>Docker Desktop can work in a pinch.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Docker (see the next section for instructions on how to install it).</li>
+</ul>
+<h3 id="how-to-install-docker">How to Install Docker</h3>
+<ol>
+<li>On Ubuntu 18.04+:<ul>
+<li>For convenience, installing Docker can be done quickly with a bash script.</li>
+<li><a href="https://bit.ly/35y7b94">https://bit.ly/35y7b94</a><ul>
+<li>Alternate URL: <a href="https://gist.github.com/oconnerj/0d8c044298bac0594245aac11f75757e">https://gist.github.com/oconnerj/0d8c044298bac0594245aac11f75757e</a></li>
+</ul>
+</li>
+<li>To use <code>docker</code> commands without <code>sudo</code>, you may need to reissue the <code>sudo usermod -aG docker $USER</code> command after the script completes successfully and then fully log out and back in.</li>
+</ul>
+</li>
+<li>On WSL 2 (running Ubuntu 18.04+):<ul>
+<li>These steps assume:<ol>
+<li>You&rsquo;re running Windows 10 20H2 or later.</li>
+<li>You already have WSL installed.</li>
+<li>You&rsquo;ve already created an Ubuntu 18.04+ distro. Use <code>wsl -l -v</code> from the Windows host to see the WSL version of your distro and make sure it&rsquo;s <code>2</code>.</li>
+</ol>
+</li>
+<li>Start with running the convenience script from the Ubuntu section above in the WSL environment, though it won&rsquo;t work 100%.</li>
+<li>The main issue you&rsquo;ll run into is that WSL 2 does not run <code>systemd</code> (or equivalent) by default. Once you hit the steps in the script which attempt to test the Docker installation, they will fail since the service will not start.</li>
+<li>So, you&rsquo;ll need to manually start the Docker daemon (e.g. <code>sudo service docker start</code>).</li>
+<li>Since it would be annoying to have to manually start the Docker daemon every time you open a new WSL session, you can configure it to start automatically:<ol>
+<li>From within WSL, create a script somewhere accessible on your home path (e.g. <code>~/.local/bin/start-docker.sh</code>) that contains a <code>service docker start</code> command.</li>
+<li>Make sure it&rsquo;s executable (<code>chmod +x &lt;file&gt;</code>).</li>
+<li>Now you&rsquo;ll need to make sure the script can be ran as sudo without a password prompt. Issue this command: <code>sudo visudo</code></li>
+<li>Add this line to the file:<ul>
+<li><code>%sudo ALL=(root) NOPASSWD: &lt;full path to file&gt;</code></li>
+<li>E.g. <code>%sudo ALL=(root) NOPASSWD: /home/username/.local/bin/start-docker.sh</code></li>
+<li>Note that the <code>~</code> alias for the user&rsquo;s home directory cannot be used here.</li>
+</ul>
+</li>
+<li>Now edit your <code>.bashrc</code> file: <code>nano ~/.bashrc</code></li>
+<li>Add this line to it:<ul>
+<li><code>sudo &lt;path to file&gt;</code></li>
+<li>E.g. <code>sudo ~/.local/bin/start-docker.sh</code></li>
+</ul>
+</li>
+<li>Now, when you begin a WSL session, Docker will start automatically.</li>
+<li>After setting all this up, you may want to issue a <code>wsl --shutdown</code> from the host and open a new session to &ldquo;reboot&rdquo; the underlying VM and make sure it works.<ul>
+<li>You should see a message like <code>* Starting Docker: docker</code> as the session opens if it&rsquo;s working.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Note that, much like Docker Desktop, using WSL 2 enables Hyper-V, which will disable the use of virtualization tools like VMware Workstation Player.<ul>
+<li>Hyper-V can be toggled with this Windows command: <code>bcdedit /set hypervisorlaunchtype &lt;off/on&gt;</code>. You&rsquo;ll need to reboot the host for it to take effect.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>On Docker Desktop (for Windows):<ul>
+<li>Go to the <a href="https://www.docker.com/products/docker-desktop">Docker Desktop page</a> and download the appropriate version of Docker Desktop for your OS.</li>
+<li>Make sure, after installation, that Docker is running in <em>Linux</em> mode. At least in Docker for Windows, it can optionally run Windows containers, which we do not want.</li>
+<li>Note that installing Docker Desktop on Windows enables Hyper-V, which will disable the use of virtualization tools like VMware Workstation Player.<ul>
+<li>Hyper-V can be toggled with this Windows command: <code>bcdedit /set hypervisorlaunchtype &lt;off/on&gt;</code>. You&rsquo;ll need to reboot for it to take effect.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="acquiring-the-tools">Acquiring the Tools</h2>
+<p>First, you&rsquo;ll need to acquire the Azure CLI if you haven&rsquo;t already.</p>
+<ul>
+<li>Windows: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli</li>
+<li>Ubuntu: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt (only the manual install instructions have been tested)</li>
+</ul>
+<p>Then, you&rsquo;ll want to download <code>kubectl</code>, which is made easy by the Azure CLI. Just run this command:</p>
+<blockquote>
+<p><code>az aks install-cli</code></p>
+</blockquote>
+<h2 id="configuring-kubectl-for-an-aks-cluster">Configuring <code>kubectl</code> for an AKS Cluster</h2>
+<p>In order to tell <code>kubectl</code> which cluster to use and which credentials to use, you&rsquo;ll need to provide a <code>kubeconfig</code>. This <code>kubeconfig</code> is in a common location, where <code>kubectl</code> checks for it by default. Thankfully, the Azure CLI can be used to acquire one. For example:</p>
+<ol>
+<li><code>az login</code> to log in to Azure. Make sure to use your Atlas account.</li>
+<li><code>az aks get-credentials --resource-group &lt;resource-group-name&gt; --name &lt;clustername&gt;</code><ul>
+<li><code>&lt;resource-group-name&gt;</code> is the name of the resource group that the cluster lives in.</li>
+<li><code>&lt;clustername&gt;</code> is the name of the cluster within that resource group.</li>
+<li>You&rsquo;ll likely be asked to sign in by entering a device code on a page in a browser. Again, make sure to use your Atlas account.</li>
+</ul>
+</li>
+<li>Now you have a <code>kubeconfig</code> (<code>~/.kube/config</code> or <code>C:\Users\your.username\.kube\config</code>) for the specified cluster.</li>
+<li>These credentials expire on a regular interval, so you&rsquo;ll need to reauthenticate from time to time.</li>
+</ol>
+<p>Once you&rsquo;ve got your <code>kubeconfig</code> set up correctly, <code>kubectl</code> should now function and allow you to access whatever resources on the cluster you have access to. Test that it works by issuing this command:</p>
+<blockquote>
+<p><code>kubectl get pod</code></p>
+</blockquote>
+<p>You&rsquo;ll either see a list of pods or &ldquo;No resources found&rdquo; if no pods are currently running. If you get an error message (especially one about being unauthorized), something went wrong and you&rsquo;ll need to troubleshoot with DevOps.</p>
+<h2 id="configuring-for-azure-container-registry">Configuring for Azure Container Registry</h2>
+<p>Getting things set up to communicate with Azure Container Registry (ACR) is both very simple and also somewhat annoying. Authenticating is the easy part—making sure your authentication isn&rsquo;t saved as plain text on disk is where things get more complicated. Follow these steps, depending on which development path you&rsquo;ve taken so far. If you&rsquo;re using WSL 2, use the Linux instructions. Otherwise, this assumes you have the correct version of Docker Desktop for your OS already installed as per the prerequisites.</p>
+<ol>
+<li>On Linux/WSL 2 only:<ul>
+<li>Before you can log in to the registry, you&rsquo;ll need to configure a credentials store or else Docker will just save your token in plaintext on disk, which is not acceptable.</li>
+<li>Some distros come with a credentials store and some don&rsquo;t. These steps assume you need to install one <em>and</em> configure Docker to use it.</li>
+<li>Commands here will be Ubuntu/Debian-based, but should port easily to any distro.</li>
+<li>Install pass: <code>sudo apt install pass</code>.</li>
+<li>Generate a GPG key for pass:<ul>
+<li><code>gpg --full-generate-key</code> will begin walking you through the generation of a key.</li>
+<li>These steps were tested using an &ldquo;RSA and RSA&rdquo; type key (option 1) that expires in <code>30y</code>.</li>
+<li>You can enter whatever for your real name and email address, though it helps to identify the key later if you use meaningful values.</li>
+<li>You&rsquo;ll be asked for a password—make sure to note your user ID, email address, and this password somewhere secure like a password store.</li>
+<li>If the generation process seems to hang after confirming the password, it&rsquo;s probably trying to generate enough entropy to pull random bytes for the key. <ul>
+<li>Spam garbage on the keyboard (though be careful; anything you type will end up in the bash prompt when the process finishes) and, if using a graphical environment, move the mouse around.</li>
+</ul>
+</li>
+<li>Once the operation has finished, run <code>gpg --list-secret-keys --keyid-format LONG</code> to see the key you generated.</li>
+<li>You should see output that looks something like this:<ul>
+<li><img alt="gpg output" src="../images/gpg-key-output-format.png" /></li>
+</ul>
+</li>
+<li>You&rsquo;ll need to copy the key ID from this for later. In the example, the key ID is the <code>A15309E4681A0B8E</code> part of the <code>rsa4096/A15309E4681A0B8E</code> phrase.</li>
+</ul>
+</li>
+<li>Run <code>pass init &lt;keyid&gt;</code> where <code>&lt;keyid&gt;</code> is that value you copied in the previous step. This initializes the credential store and makes it ready for Docker to use.<ul>
+<li>Ex: <code>pass init A15309E4681A0B8E</code></li>
+</ul>
+</li>
+<li>Now you&rsquo;ll need to acquire the Docker credential helper. Start by navigating here: <a href="https://github.com/docker/docker-credential-helpers/releases">https://github.com/docker/docker-credential-helpers/releases</a>.</li>
+<li>Download the file most similar to <code>docker-credential-pass-vX.Y.Z-amd64.tar.gz</code>.</li>
+<li>Extract the binary within and make it executable (<code>chmod +x docker-credential-pass</code>).</li>
+<li>Put the file wherever you normally put binaries.</li>
+<li>Now, configure Docker to use it:<ul>
+<li>Open the file <code>$HOME/.docker/config.json</code> or create it if it doesn&rsquo;t exist.</li>
+<li>Add a new key/value pair: <code>"credsStore": "pass"</code>. It should look something like this after you add it, but it&rsquo;s OK if the <code>credsStore</code> field is the only one on the object:<ul>
+<li><img alt="example docker config json" src="../images/example-docker-config-json.png" /></li>
+</ul>
+</li>
+<li>Restart Docker (<code>sudo systemctl restart docker</code> or <code>sudo service docker restart</code>).</li>
+</ul>
+</li>
+<li><strong>If you&rsquo;re using WSL 2 or a terminal-only/headless distro of Linux</strong>, you need to make a minor tweak before proceeding any further:<ul>
+<li>Open your <code>.bashrc</code> file for editing (e.g. <code>nano ~/.bashrc</code>)</li>
+<li>Add this to the end of the file: <code>export GPG_TTY=$(tty)</code></li>
+<li>Run <code>source ~/.bashrc</code> or open a fresh terminal to ensure the <code>GPG_TTY</code> variable is set properly.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Open a terminal/PowerShell session.</li>
+<li>Log in to Azure CLI:<ul>
+<li><code>az login</code></li>
+<li>Make sure to use your Atlas account.</li>
+</ul>
+</li>
+<li>Log in to ACR:<ul>
+<li><code>az acr login --name &lt;registry name&gt;</code><ul>
+<li>Example: <code>az acr login --name atlasalertingstudio</code></li>
+</ul>
+</li>
+<li>You should see &ldquo;Login succeeded&rdquo; if it worked.</li>
+</ul>
+</li>
+<li>Test that you can pull an image:<ul>
+<li><code>docker pull atlasalertingstudio.azurecr.io/test/busybox:v1</code></li>
+<li>On Linux this should succeed. On Windows and Mac you may see <code>image operating system "linux" cannot be used on this platform</code>, which is still a success (though it does indicate you need to switch Docker Desktop to Linux mode).</li>
+</ul>
+</li>
+</ol>
+<h2 id="other-tools">Other Tools</h2>
+<p>There are a few other tools strongly recommended that will help with managing and using Kubernetes.</p>
+<ol>
+<li><a href="https://github.com/kubernetes/minikube">minikube</a><ul>
+<li>A local workstation Kubernetes cluster used for development.</li>
+</ul>
+</li>
+<li><a href="https://github.com/ahmetb/kubectx"><code>kubectx</code> + <code>kubens</code></a><ul>
+<li><code>kubectx</code> makes it simpler to switch between multiple Kubernetes clusters (e.g. minikube, a Test cluster, and a Prod cluster).</li>
+<li><code>kubens</code> makes it trivial to switch active Kubernetes namespaces.</li>
+<li>These are Bash scripts, so they won&rsquo;t work on Windows unless you&rsquo;re using Bash on Windows (e.g. through Git Bash).</li>
+</ul>
+</li>
+<li><a href="https://github.com/ahmetb/kubectl-aliases"><code>kubectl</code> aliases</a><ul>
+<li>Several useful aliases for <code>kubectl</code> (for Bash or zsh shells).</li>
+<li>You may need to create a <code>~/.bashrc</code> file manually before you can follow the installation steps.</li>
+</ul>
+</li>
+<li><a href="https://github.com/shanoor/kubectl-aliases-powershell"><code>kubectl</code> aliases for PowerShell</a><ul>
+<li>PowerShell fork of the above.</li>
+</ul>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Here are solutions for a few common problems folks have run into while working with AKS/Kubernetes/Docker (especially in WSL).</p>
+<blockquote>
+<h3 id="i-get-a-resource-could-not-be-found-in-subscription-error-when-trying-to-log-into-azure-container-registry-using-az-acr-login">I get a &ldquo;resource could not be found in subscription&rdquo; error when trying to log into Azure Container Registry using <code>az acr login</code>.</h3>
+</blockquote>
+<p>There are a few things to try if you get this error, or one like it. Try them in this order:</p>
+<ol>
+<li>Make sure you&rsquo;re using the correct registry name. The name must be globally unique, and has several restrictions, so it may be unusual. For example, Alerting Studio&rsquo;s registry name is <code>atlasalertingstudio</code>.</li>
+<li>Ensure that you&rsquo;re logging into Azure (<code>az login</code>) using the correct account. Most of the time, the correct account is your Atlas (<code>@atlasdsr.com</code>) account rather than an Advantage account or other type of Microsoft account.</li>
+<li>Make sure Ops has added you to any necessary AD groups and/or Azure RBAC roles.<ul>
+<li>To be able to log in, you&rsquo;ll need at minimum the <code>AcrPull</code> Azure RBAC role (or equivalent privileges). These roles are usually inherited via AD group membership instead of granted directly.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<h3 id="when-using-kubens-on-windows-with-an-aks-cluster-i-get-an-invalid-memory-address-or-nil-pointer-dereference-error">When using <code>kubens</code> on Windows with an AKS Cluster, I get an &ldquo;invalid memory address or nil pointer dereference&rdquo; error.</h3>
+</blockquote>
+<p>This is a <a href="https://github.com/ahmetb/kubectx/issues/240">known issue</a> with the Windows version of <code>kubens</code>. You can attempt to add the <code>--admin</code> flag to your <code>az aks get-credentials</code> command when you&rsquo;re acquiring your kubeconfig. This has worked for a couple folks, but this workaround hasn&rsquo;t been fully vetted.</p>
+<p>If the workaround doesn&rsquo;t help, you can always just run the commands separately.</p>
+<ul>
+<li><code>kubectl config get-contexts $(kubectl config current-context)</code> will show your current k8s context and namespace (blank is default).</li>
+<li><code>kubectl get namespaces</code> will list all namespaces.</li>
+<li><code>kubectl config set-context --current --namespace=(whatever-namespace)</code> will change your current context&rsquo;s namespace.</li>
+</ul>
+<p>Aliasing these commands can help cut down on repetitive strain injury.</p>
+<blockquote>
+<h3 id="i-used-wsl-import-to-import-a-linux-distribution-but-now-my-sessions-log-in-as-root-how-fix">I used <code>wsl --import</code> to import a Linux distribution, but now my sessions log in as <code>root</code>. How fix?</h3>
+</blockquote>
+<p>For whatever reason, when you <code>wsl --export</code> a distro, the magic scaffolding that automatically logs you in as your Linux user account doesn&rsquo;t come along for the ride. Importing it causes new sessions to just fall back to <code>root</code>. This is especially frustrating if you&rsquo;re remoting your development (e.g. through VS Code into WSL), as terminals opened from the IDE will also log in as <code>root</code>. Thankfully, there is a workaround:</p>
+<ul>
+<li>Within WSL, create (or edit) <code>/etc/wsl.conf</code>.</li>
+<li>Create this section and key:</li>
+</ul>
+<pre><code>[user]
+default=your-linux-username
+</code></pre>
+
+<ul>
+<li>Replace <code>your-linux-username</code> with&ndash;surprise&ndash;your Linux username.</li>
+<li>Close all WSL sessions.</li>
+<li>From Windows, run <code>wsl --shutdown</code>. Then open a new WSL session.</li>
+</ul>
+<p>The new session should automatically log in as your Linux user account instead of <code>root</code>.</p>
+<blockquote>
+<h3 id="it-seems-like-i-have-to-re-acquire-the-kubeconfig-for-the-kubernetes-cluster-every-day">It seems like I have to re-acquire the <code>kubeconfig</code> for the Kubernetes cluster every day.</h3>
+</blockquote>
+<p>This is intended behavior. Azure acts as an authentication provider for the Kubernetes clusters it provisions. You&rsquo;ll need to re-login (via <code>az aks get-credentials</code>) occasionally.</p>
+<blockquote>
+<h3 id="im-getting-certificate-trust-or-httpsssl-connection-errors-in-wsl-it-works-sometimes-but-then-seems-to-stop-working-y-tho">I&rsquo;m getting certificate trust or HTTPS/SSL connection errors in WSL. It works sometimes but then seems to stop working. Y tho?</h3>
+</blockquote>
+<p>There&rsquo;s a bug in WSL that causes it to stop keeping up with the current date/time when the host machine goes to sleep. When the time in WSL gets out-of-sync enough, SSL verifications will fail. You can confirm this is the cause by running <code>date</code> and checking if the time is dramatically off.</p>
+<p>The only known workaround at the moment is to restart WSL. Close all sessions, run <code>wsl --shutdown</code> in Windows, and then open a new session.</p>
+<h2 id="useful-resources">Useful Resources</h2>
+<p>Here are some useful resources for learning and managing Kubernetes.</p>
+<ul>
+<li><a href="https://kube.academy">Kubernetes Academy</a><ul>
+<li>A series of handy Kubernetes courses from VMware.</li>
+<li>Despite being from VMware, most of the courses are generic to all Kubernetes implementations.</li>
+<li>Avoid courses specifically targeting PKS/TKG/TKGI.</li>
+</ul>
+</li>
+<li><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way">Kubernetes the Hard Way</a><ul>
+<li>A tutorial/lab exercise walking you through the manual configuration of a Kubernetes cluster.</li>
+<li>Helpful to get a better grasp on what&rsquo;s going on behind the curtain.</li>
+</ul>
+</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2021-06-08 20:48:33 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

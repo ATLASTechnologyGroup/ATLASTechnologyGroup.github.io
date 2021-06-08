@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Docker and Kubernetes Conventions - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Misc/configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../coding-convention/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../examples-constructor/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#docker-and-kubernetes-conventions">Docker and Kubernetes Conventions</a></li>
+        <li class="main "><a href="#docker">Docker</a></li>
+            <li><a href="#organization-in-harbor">Organization in Harbor</a></li>
+            <li><a href="#organization-in-other-container-registries">Organization in other Container Registries</a></li>
+            <li><a href="#tags">Tags</a></li>
+            <li><a href="#dockerfile-location">Dockerfile Location</a></li>
+        <li class="main "><a href="#kubernetes">Kubernetes</a></li>
+            <li><a href="#naming-and-path-conventions">Naming and Path Conventions</a></li>
+            <li><a href="#labels">Labels</a></li>
+            <li><a href="#annotations">Annotations</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="docker-and-kubernetes-conventions">Docker and Kubernetes Conventions</h1>
+<p>This document outlines conventions to be used for Docker and Kubernetes within Atlas projects. Naming conventions, path conventions, and so on are covered here.</p>
+<h1 id="docker">Docker</h1>
+<h2 id="organization-in-harbor">Organization in Harbor</h2>
+<p>When arranging your images within Harbor (or any similar container registry that uses a Project and Repository-based structure), follow these conventions. For more basic registries (e.g. Azure Container Registry) that only support Repositories, see the <a href="#organization-in-other-container-registries">below section</a>.</p>
+<h3 id="projects">Projects</h3>
+<p>Project names should be <code>kebab-case</code>; in other words, all lowercase with hyphen-separated words.</p>
+<p>For images which can be cleanly attributed to a single effort, product, or system, a Harbor project should be created representing that system. For example, if you&rsquo;re working on Alerting Studio, images that are a part of it should live within the <code>alerting-studio</code> project.</p>
+<p>When the image is a <strong>base image</strong>, to be consumed by many other (uncategorized or ungroupable) images, use the existing <code>base-images</code> project. Base images used only by a single system or product should fall under that system&rsquo;s project.</p>
+<p>If the image is a <strong>generic tool</strong> or utility to be used for, as an example, performing manual admin tasks in a customized environment (e.g. a preconfigured image for utilizing Crunchydata&rsquo;s PGO client), it should use the existing <code>tools</code> project.</p>
+<p>Images <strong>replicated</strong> directly from another registry (like Docker Hub) go into the <code>library</code> project.</p>
+<p>Images pushed <strong>temporarily</strong> to test something out can go into the <code>temp</code> project—they will be deleted after a week by a project-wide tag retention policy. (Obviously this is specific to our Harbor instance and probably doesn&rsquo;t exist in other registries.)</p>
+<h3 id="repositoriesimage-names">Repositories/Image Names</h3>
+<p>Quick conventions:</p>
+<ul>
+<li>Image names should be <code>kebab-case</code>.</li>
+<li>Despite them being organized under projects, try to name images uniquely. <ul>
+<li>In scenarios where the image name is the same beneath multiple projects, several assumptions may be made (correct or incorrect) about how they relate.</li>
+</ul>
+</li>
+<li>The name should be descriptive of the application(s) being run within the container.<ul>
+<li>If the image is intended as a layer/base image, it should describe what the image adds to the stack.</li>
+</ul>
+</li>
+<li>It is valid to use slashes within image names to create pseudo-subcategories where doing so helps organize the images into logical units.<ul>
+<li>For example: <code>base-images/dotnet/sdk</code>, where <code>base-images</code> is the project name and <code>dotnet/sdk</code> is the image name.</li>
+<li>Try to avoid using more than one of these extra subcategories.</li>
+</ul>
+</li>
+</ul>
+<h2 id="organization-in-other-container-registries">Organization in other Container Registries</h2>
+<p>The major difference between Harbor and more basic registries is that Harbor has a lot of additional functionality around managing repositories and tags. None of this additional functionality is available in something like Azure Container Registry (at least, not the Basic SKU), and as a result these registries will follow similar but slightly altered conventions.</p>
+<p>Starting with the same conventions as Harbor, the following differences apply:</p>
+<ul>
+<li>As there is no concept of a Project, you should instead use additional pseudo-subcategories within your repository/image names. An example comparison:<ul>
+<li>Harbor: Project <code>alerting-studio</code>, repository named <code>front-end/alerting-app</code></li>
+<li>Basic registry: Repository named <code>alerting-studio/front-end/alerting-app</code></li>
+</ul>
+</li>
+<li>Try to avoid using more than 2 categories (3 total identifiers) in a basic registry.<ul>
+<li>Example of what <strong>not</strong> to do:<ul>
+<li><code>base-images/microsoft/mcr/dotnet/sdk</code></li>
+</ul>
+</li>
+<li>Counter-example of how it should be done:<ul>
+<li><code>base-images/dotnet/sdk</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>There is no <code>temp</code> project. You should not push temporary images to the registry.</li>
+<li>The <code>tools</code>, <code>library</code>, and <code>base-images</code> projects also do not exist, but repository names can continue to follow those conventions in their naming scheme.</li>
+<li>Replication functionality is often not available, so replications from other registries will need to be done through other means.</li>
+</ul>
+<h2 id="tags">Tags</h2>
+<p>Repositories containing application code (e.g. modules of a system that are deployable and runnable) should always have at least 3 tags:</p>
+<ul>
+<li><code>latest</code></li>
+<li>A version number equivalent to the version number of the module/component within, following the guidelines expressed in the <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a> doc. The <code>v</code> prefix is not needed; for example, the <code>v</code> in <code>v1.3</code> is unnecessary—just <code>1.3</code> will suffice for the tag.</li>
+<li>A build number that corresponds directly to the CI/CD pipeline build number that caused the image to be pushed.<ul>
+<li>If the version number of the module <em>is</em> the build number, then one tag satisfies both requirements.</li>
+</ul>
+</li>
+</ul>
+<p>Obviously, as more builds are produced and more versions released, there will be many tags for different versions and builds. <code>latest</code> will always represent the most recently pushed version.</p>
+<p>Repositories containing images used for layering or as base images exclusively should always be very specific with their tags. They <em>cannot</em> have a <code>latest</code> tag. Especially if the image takes dependencies on third-party modules or images, the tag must contain the dependency versions. Example:</p>
+<ul>
+<li><code>tools/python-poetry:3.7-slim-1.0.5</code> indicates that the <code>tools/python-poetry</code> image with tag <code>3.7-slim-1.0.5</code> takes dependencies on:<ul>
+<li><code>python:3.7-slim</code></li>
+<li><a href="https://python-poetry.org/">Poetry</a> version 1.0.5</li>
+</ul>
+</li>
+</ul>
+<p>Replications from another registry <strong>must also replicate specific tags</strong>. They cannot replicate <code>latest</code>.</p>
+<h2 id="dockerfile-location">Dockerfile Location</h2>
+<p>As a default, the Dockerfile for a repo should live at its root. This is because, for most projects, in order for the Dockerfile to have access to all of the files necessary to build the image, it needs to be at the root—Docker does not allow files to be referenced which live above the Dockerfile in the folder hierarchy.</p>
+<p>However, in the following situations, the Dockerfile can be moved elsewhere:</p>
+<ul>
+<li>If only part of the repo is actually touched by the Dockerfile, it can live within the highest relevant folder.<ul>
+<li>In larger repos with multiple deployments, this is often necessary (although having large repos with multiple deployments is discouraged).</li>
+<li>Here&rsquo;s a trivial example:</li>
+</ul>
+</li>
+</ul>
+<pre><code>.
+├── App.Api
+│   ├── Dockerfile
+│   ├── app.csproj
+│   └── code.cs
+├── CloudConfig
+│   └── cloud.cfg
+├── README.md
+└── deploy
+    └── kubernetes
+        ├── base
+        │   └── kustomization.yaml
+        ├── kustomization.yaml
+        ├── overlay-dev
+        │   └── kustomization.yaml
+        └── overlay-prod
+            └── kustomization.yaml
+</code></pre>
+
+<h1 id="kubernetes">Kubernetes</h1>
+<h2 id="naming-and-path-conventions">Naming and Path Conventions</h2>
+<p>File names and object names should be <code>kebab-case</code>.</p>
+<p>When organizing manifests, it&rsquo;s better to split each object into its own YAML file. Name it after the object type. If you have more than one manifest of the same type, prefix it with the name of the object or its purpose (e.g. <code>postgres-data-pvc.yaml</code>). Any <a href="https://kubernetes.io/docs/reference/kubectl/overview/#resource-types">short name/abbreviation supported by <code>kubectl</code></a> is allowed.</p>
+<p>As for path conventions within your source directory, it&rsquo;s a good idea to put deployment scripts and resources in their own directory. Especially if you&rsquo;re using Kustomize with one or more overlays, you&rsquo;ll need to keep things organized and away from your actual source code. Here&rsquo;s an example (from this very doc site, abridged):</p>
+<pre><code>.
+├── Dockerfile
+├── README.md
+├── ...
+├── deploy
+│   └── kubernetes
+│       ├── base
+│       │   ├── deployment.yaml
+│       │   ├── kustomization.yaml
+│       │   ├── namespace.yaml
+│       │   ├── sa-role-rolebinding.yaml
+│       │   └── service.yaml
+│       ├── dev
+│       │   ├── dev-ingress.yaml
+│       │   └── kustomization.yaml
+│       └── prod
+│           ├── kustomization.yaml
+│           └── prod-ingress.yaml
+└── ...
+</code></pre>
+
+<p>The manifests live in a <code>kubernetes</code> folder beneath <code>deploy</code> as a best practice. In case the application needs to deploy to other environments, the pathing required by <code>kustomization</code> files isn&rsquo;t broken when things get rearranged.</p>
+<p>A few applications were developed before these conventions were finalized. These are just conventions, but it is strongly recommended that we keep consistency between projects. So, if your repo doesn&rsquo;t follow these guidelines, you should restructure it to do so unless it absolutely doesn&rsquo;t make sense for your project.</p>
+<h2 id="labels">Labels</h2>
+<p>Labels are a very important piece of identifying metadata in a Kubernetes manifest. They may just be key-value pairs, but among other uses, they&rsquo;re the most common way to associate objects together (such as pieces of a named deployment). These associations are used for more than just notation; they&rsquo;re often used to connect pieces together.</p>
+<h3 id="labels-and-services">Labels and Services</h3>
+<p>The most often applied use case for labels is to tie pods together such that they can be referenced by a service. A service can represent a number of related (or potentially unrelated) pods, and those pods are usually selected using labels. Here&rsquo;s an example deployment and service:</p>
+<pre><code class="yaml"># deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: test-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test-nginx
+  template:
+    metadata:
+      labels:
+        app: test-nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+</code></pre>
+
+<pre><code class="yaml"># service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+  labels:
+    app: test-nginx
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: test-nginx
+</code></pre>
+
+<p>You&rsquo;ll notice the use of <code>app: test-nginx</code> in several places. This key-value pair denotes that the labeled resources (including pods spun up by the deployment) are part of the <code>test-nginx</code> application. The <code>nginx-svc</code> service then uses that label as a selector to define which pods should be represented by the service.</p>
+<h3 id="labels-and-filtering">Labels and Filtering</h3>
+<p>Labels do still serve as important metadata, despite their functional nature. This metadata can make management and maintenance of a Kubernetes cluster easier. For example, label selectors can be used not only in specifications, but also in API queries. As a result, if you have other metadata that can help describe or organize the resource, add it. Just be careful that you don&rsquo;t cross concerns with other resources in unintended ways, and know that labels are immutable.</p>
+<p>See <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#list-and-watch-filtering">this page from the Kubernetes docs</a> for more info.</p>
+<h3 id="label-conventions">Label Conventions</h3>
+<p>Now armed with an understanding of labels, here are the conventions around the minimum way they should be used in our environment:</p>
+<ul>
+<li>Resources should always carry an <code>app: x</code> label, where <code>x</code> is the name of the application (<code>kebab-case</code>). <ul>
+<li>It is expected that the labels are authoritative even if multiple instances exist. For example, if two instances of <code>app: nginx</code> exist, both have the <code>app: nginx</code> label. Selectors will use additional labels to refine which instance is intended, if not both.</li>
+</ul>
+</li>
+<li>Resources should carry an <code>environment</code> label that represents the intended environment of the resource.<ul>
+<li>For example, a resource that&rsquo;s part of a dev deployment should carry an <code>environment: dev</code> label.</li>
+</ul>
+</li>
+<li>Resources should, as often as possible, carry a <code>tier</code> label that represents which architectural tier the resource belongs to.<ul>
+<li>Example: an nginx deployment hosting a site would have a <code>tier: frontend</code> label.</li>
+</ul>
+</li>
+</ul>
+<h2 id="annotations">Annotations</h2>
+<p>The primary difference between labels and annotations in Kubernetes is the intention of each. Since labels can be queried/filtered/selected by the core system, they are intended to be used for <em>identifying</em> data. Annotations are not to be used for identifiers, as they cannot be used in selectors and are not designed for efficient querying. As such, they can be used for arbitrary metadata wherever it makes sense.</p>
+<p>Quick conventions:</p>
+<ul>
+<li>When a deployment is issued, the <code>change-cause</code> annotation should be updated to reflect it. It should include the source of the change. <ul>
+<li>For example, this docsite annotates the deployment with this command after the rollout using an Azure DevOps task:<ul>
+<li><code>kubectl annotate deployment/eng-docsite kubernetes.io/change-cause="Azure DevOps - $(Release.DefinitionName) - $(Release.ReleaseWebURL)"</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Where possible, resources should be annotated with a build ID from the CI/CD system as a <code>build</code> annotation.</li>
+<li>Resources deployed through a pipeline should carry an artifact of their release as a <code>release</code> annotation.<ul>
+<li>One such case is when resources are deployed through Azure DevOps. Resources deployed through a pipeline should be annotated with the release ID and/or the release name. E.g. <code>release: "Release-47"</code> (see <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/release/variables?view=azure-devops&amp;tabs=batch#default-variables---release">this page</a> for Azure DevOps release variables).</li>
+</ul>
+</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2021-06-08 20:48:33 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

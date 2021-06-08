@@ -1,0 +1,8 @@
+/* Don't do anything here that would cause the page to look weird in other (non-mkdocs) renderers */
+
+/* Hack to center images */
+div[role="main"] p img[alt~="centered"] {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
