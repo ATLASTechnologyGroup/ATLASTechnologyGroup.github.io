@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Distributed Architecture Strategy - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Conventions/api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../configure-workstation-aks/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../kubernetes-deployment-guidelines/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#distributed-architecture-strategy">Distributed Architecture Strategy</a></li>
+            <li><a href="#table-of-contents">Table of Contents</a></li>
+            <li><a href="#important-terms">Important Terms</a></li>
+            <li><a href="#microservices-example">Microservices Example</a></li>
+            <li><a href="#when-to-use-distributed-architecture">When to use Distributed Architecture</a></li>
+            <li><a href="#why-distributed-architecture">Why Distributed Architecture?</a></li>
+            <li><a href="#granularity">Granularity</a></li>
+        <li class="main "><a href="#documentation">Documentation</a></li>
+            <li><a href="#documentation-centralization">Documentation Centralization</a></li>
+            <li><a href="#documentation-automation">Documentation Automation</a></li>
+            <li><a href="#documentation-prioritization">Documentation Prioritization</a></li>
+        <li class="main "><a href="#application-design-philosophy">Application Design Philosophy</a></li>
+            <li><a href="#the-10-hops-rule">The 10-Hops Rule</a></li>
+            <li><a href="#fault-tolerance">Fault Tolerance</a></li>
+            <li><a href="#communication-contracts">Communication Contracts</a></li>
+        <li class="main "><a href="#deployment-tactics-and-service-management">Deployment Tactics and Service Management</a></li>
+            <li><a href="#service-level-agreements-slas-and-metrics">Service-Level Agreements (SLAs) and Metrics</a></li>
+            <li><a href="#the-stoplight-strategy">The Stoplight Strategy</a></li>
+            <li><a href="#ci-and-cd">CI and CD</a></li>
+        <li class="main "><a href="#summary">Summary</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="distributed-architecture-strategy">Distributed Architecture Strategy</h1>
+<p>Much of our new design is oriented around a much more distributed architecture than we&rsquo;ve normally used at ATLAS. While we are a little late to the party, that also means we have the chance to learn from our forebears and not make the same mistakes.</p>
+<p>Many people think of microservices when they think of distributed architecture. While this is the primary implementation today, distributed architectures have been around since the dawn of computing. They can take many different forms, each with their own pros and cons. At ATLAS, we should be hesitant to refer to our version as &ldquo;microservices&rdquo;—not out of dislike for the pattern, necessarily, but because the term brings several implications with it. Being realistic, a full-on microservice-oriented architecture will be challenging for us to achieve simply due to our staffing limitations.</p>
+<p>Throughout this document (and any time we discuss architecture going forward), the terms &ldquo;microservices&rdquo; and &ldquo;distributed architecture&rdquo; will be used fairly interchangeably. Documentation should emphasize the <em>ideal</em> architecture, even if in practice we must make some sacrifices and compromises.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#distributed-architecture-strategy">Distributed Architecture Overview</a><ul>
+<li><a href="#important-terms">Important Terms</a></li>
+<li><a href="#microservices-example">Microservices Example</a></li>
+<li><a href="#when-to-use-distributed-architecture">When to use Distributed Architecture</a></li>
+<li><a href="#why-distributed-architecture">Why Distributed Architecture?</a></li>
+<li><a href="#granularity">Granularity</a><ul>
+<li><a href="#granularization-example">Granularization Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#documentation">Documentation</a><ul>
+<li><a href="#documentation-centralization">Documentation Centralization</a></li>
+<li><a href="#documentation-automation">Documentation Automation</a><ul>
+<li><a href="#other-automation">Other Automation</a></li>
+</ul>
+</li>
+<li><a href="#documentation-prioritization">Documentation Prioritization</a></li>
+</ul>
+</li>
+<li><a href="#application-design-philosophy">Application Design Philosophy</a><ul>
+<li><a href="#the-10-hops-rule">The 10-Hops Rule</a></li>
+<li><a href="#fault-tolerance">Fault Tolerance</a><ul>
+<li><a href="#avoiding-retry-storms">Avoiding Retry Storms</a></li>
+</ul>
+</li>
+<li><a href="#communication-contracts">Communication Contracts</a></li>
+</ul>
+</li>
+<li><a href="#deployment-tactics-and-service-management">Deployment Tactics and Service Management</a><ul>
+<li><a href="#service-level-agreements-slas-and-metrics">Service-Level Agreements (SLAs) and Metrics</a><ul>
+<li><a href="#good-slas-vs-bad-slas">Good SLAs vs. Bad SLAs</a></li>
+<li><a href="#slas-and-microservices">SLAs and Microservices</a></li>
+</ul>
+</li>
+<li><a href="#the-stoplight-strategy">The Stoplight Strategy</a><ul>
+<li><a href="#the-stoplight-strategy-in-practice">The Stoplight Strategy In Practice</a></li>
+</ul>
+</li>
+<li><a href="#ci-and-cd">CI and CD</a><ul>
+<li><a href="#example-ci-and-cd-workflow">Example CI and CD Workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+<h2 id="important-terms">Important Terms</h2>
+<p>In the scope of this document, there are some terms we should set definitions for to avoid confusion.</p>
+<ul>
+<li><strong>Granularity</strong>: a measure of the degree of separation, isolation, and individualization given to units of a system. A system can be said to be highly granular when its implementation involves many small, distinct units working together.</li>
+<li><strong>Service</strong>: any discrete, resident application whose purpose is to react in some functional way to requests or events. <ul>
+<li><em>(This is called out to denote a difference between what is considered a &ldquo;service&rdquo; here—just the conceptual object—and the more concrete patterns we usually take for granted when we discuss services.)</em></li>
+</ul>
+</li>
+<li><strong>Robustness</strong>: the measure of a process&rsquo;s ability to cope with erroneous input or faults gracefully.</li>
+<li><strong>Uptime of scale</strong>: Rather than the literal uptime of a given process, <em>uptime of scale</em> is the healthiness of a distributed system as measured by its adherence to steady state over a window of time.<ul>
+<li>In other words, the <em>uptime of scale</em> is the measurement of a given system&rsquo;s ability to sustainably maintain its scale.</li>
+<li>This differs from <em>availability</em> in that a service can still be available while experiencing a low <em>uptime of scale</em>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="microservices-example">Microservices Example</h2>
+<p>A microservice-oriented architecture might propose that the operation &ldquo;run a report&rdquo; (as it exists in current ATLAS, newer designs notwithstanding) consists of several distinct services. It may have services for:</p>
+<ul>
+<li>Loading metadata and compiling the report (e.g. AdHocs)</li>
+<li>Performing validation (<code>IsValid</code>)</li>
+<li>Performing SQL replacements (<code>RunDynamicSql</code>)</li>
+<li>Executing report SQL</li>
+<li>Executing post-processing</li>
+<li>Performing Excel exporting</li>
+<li>Delivering results</li>
+</ul>
+<p>Each of these services are currently just steps of the monolithic report pipeline. However, due to the monolithic design, each of these steps has innumerable cross-cutting concerns. Worse, this logic has far-reaching and omniscient dependencies throughout that service. As a result, the entire report pipeline incurs the risk of regression even if only a single step needs to change. Additionally, even a transient failure at any single step causes the entire pipeline to fail.</p>
+<p>Exactly <em>how granular</em> your services should go is a subject of hot debate in the field still to this day. One could easily imagine each of those steps being further broken into smaller services: a service for delivering FTP results, a service for delivering email results, a service for executing BI reports, a service for executing AdHoc reports—the list goes on. This is part of the hesitation to use the word &ldquo;microservices&rdquo; when describing our distributed architecture. While there <em>could</em> be value in going more granular with these services, that value should be measured during design and balanced against the increase in complexity and overhead.</p>
+<h2 id="when-to-use-distributed-architecture">When to use Distributed Architecture</h2>
+<p>Distributed architecture is a great solution to many problems, but it does not solve every problem. Certainly, it isn&rsquo;t the right solution at all for some problems. These distributed service patterns, like microservices, bring with them a decent amount of overhead and complexity. If you select them to solve your design problems, you are making a trade-off. The amount of benefit you gain can be conceptually represented as a &ldquo;multiplier&rdquo; that depends on your problem. Some problems have huge multipliers—basically anything that needs to scale quickly and widely, or anything which needs highly isolated parallelism. Some problems have near-zero multipliers, or even negative multipliers.</p>
+<p>It is very important, before deciding to go with microservices or similar architectures, that you evaluate your problem&rsquo;s multiplier. Read the <a href="#why-distributed-architecture">Why Distributed Architecture?</a> section to help figure out how much your particular engineering problem will benefit from distribution. As an example: relatively simple applications, temporary solutions, quick fixes, dirty hacks, and some client applications have very low multipliers. From a mindset perspective, it&rsquo;s probably wise to always begin with a more monolithic design. Only break it down when you discover the advantages of doing so outweigh the disadvantages (more on that strategy later).</p>
+<p>That said, don&rsquo;t be afraid of choosing distributed architecture where it makes sense. This section exists more to warn you against using it for trivial applications or forcing it to apply to problems which resist it. There is no mandate that says &ldquo;all projects going forward <em>must</em> be designed using a distributed architecture,&rdquo; but we now have the infrastructure to support it more robustly than ever before. Instead, this document should serve as a helpful teaching tool and guide for <em>why</em> you might want to use these patterns, and how to use them successfully.</p>
+<h2 id="why-distributed-architecture">Why Distributed Architecture?</h2>
+<p>Detractors of microservices as a pattern often cite that the complexity of the pattern isn&rsquo;t worth the gains. The claim is that this complexity increases exponentially as the number of services increases, yet in order to &ldquo;do it right,&rdquo; one must create highly granular services—which, of course, leads to high complexity.</p>
+<p>It&rsquo;s certainly irrefutable that system complexity grows exponentially as the number of services increases. However, the granularity of the system is a variable that can be tweaked to avoid complexity. As with any architecture, you measure the strengths and the weaknesses and choose the right one for the job. Distribution is not the correct solution for every problem, but it&rsquo;s very effective at solving certain types of problems.</p>
+<p>Here are some of the benefits of choosing a distributed architecture. If your business problem aligns well with these benefits, it increases that <a href="#when-to-use-distributed-architecture">conceptual multiplier</a>. These are the reasons you might choose this architecture over others:</p>
+<ol>
+<li>Reduction of friction in development and deployment<ul>
+<li>Improves the development and debugging experience by isolating effort into a single module</li>
+<li>Tends to make deployments deterministic and far simpler, more robust</li>
+<li>Enables Continuous Deployment, which ensures a fast stream of improvements <em>and</em> a quick time-to-fix for defects<ul>
+<li>CD is challenging with monolithic applications because deployment takes so long and regressions can be very broad. A single microservice can build and deploy in seconds, and issues are usually isolated to that one service</li>
+<li>In our ecosystem, we&rsquo;re looking at time improvements measured in <em>hours</em> for many defects; the <em>test, deploy, re-test</em> cycle for a fix is significantly expedited</li>
+<li>Zero-downtime CD is possible, if the infrastructure is designed correctly</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Isolation of responsibilities and concerns at the module level<ul>
+<li>Lends to better designs, more future-proof APIs, and fewer defects</li>
+<li>Allows a much greater ability to test modules individually, which increases code quality and robustness</li>
+</ul>
+</li>
+<li>Scalability<ul>
+<li>Makes our business more flexible</li>
+<li>Allows us to alleviate bottlenecks and improve customer experience as needed with almost no spin-up time</li>
+<li>Reduces friction between dev and ops teams</li>
+</ul>
+</li>
+<li>Sharing of components and services <ul>
+<li>Greatly speeds development and enhances products with less dev effort</li>
+<li>Multiplies improvements across all participating products</li>
+</ul>
+</li>
+<li>Infrastructure and language freedom<ul>
+<li>Services can be written in the best language for the job</li>
+<li>By design, a microservice should be as infrastructure-independent as possible to increase its motility</li>
+<li>Reduces cost to the business</li>
+</ul>
+</li>
+<li>Separation into distinct services leads to more <em>complete</em> applications<ul>
+<li>Microservices are first-class applications with their own resiliency, high-availability strategies, fault tolerance, error handling, and so on</li>
+<li>This not only makes applications more resilient, it also tends to improve visibility and logging/metrics</li>
+</ul>
+</li>
+<li>Enables cross-functional, smaller teams to be more productive<ul>
+<li>Without monoliths full of omniscient dependencies, it&rsquo;s much easier for any developer to work on any piece of the puzzle</li>
+<li>This reduces costs and increases developer utilization</li>
+</ul>
+</li>
+<li>Reduction in business risk due to better facilitation of agile development<ul>
+<li>Since each piece of an application is discrete, agile teams can produce easily deliverable units</li>
+<li>Modules that change as a result of agile feedback loops are easily replaced with minimal lost effort</li>
+</ul>
+</li>
+</ol>
+<h2 id="granularity">Granularity</h2>
+<p>This is it: the million dollar question. How granular should your services be? How much should you break up functional units into individual services versus grouping them at higher levels of abstraction? Sadly, there is no easy answer. Instead, for every use case, you&rsquo;ll need to evaluate the advantages and disadvantages to find a good balance point.</p>
+<hr />
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Every level of granularity is another unit of scaling, high-availability, and logical separation</li>
+<li>Each granular service introduces another level of reusability that other services can opt into</li>
+<li>Each granular service is easily self-contained, increasing efficiency, robustness, and project management flexibility</li>
+<li>Application failures tend to be isolated to single small, replaceable, easily fixable units</li>
+<li>Service failures almost never cause system downtime once the functional units are granular enough <ul>
+<li>Parts of an application will continue to operate even if others are down</li>
+</ul>
+</li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul>
+<li>Every level of granularity increases complexity, eventually to the point of making the architecture incomprehensible<ul>
+<li>Even with extensive documentation, building a mental map of a highly-granular microservice-oriented application requires a great effort</li>
+</ul>
+</li>
+<li>Each granular service is another item that must be managed, maintained, developed, and owned</li>
+<li>Each granular service introduces additional overhead on a request, especially in sequential operations</li>
+<li>Application failures are more challenging to track down due to the high number of interconnecting parts</li>
+</ul>
+<hr />
+<p>The guideline for granularity is pretty simple, though it&rsquo;s more philosophical than scientific. <strong>Make every unit as granular as you can, so long as you are able to amplify the advantages and minimize the disadvantages.</strong> If going more granular no longer amplifies the advantages, or raises the disadvantages to an uncomfortable level, your unit is granular enough.</p>
+<p>One could imagine, especially as we first dip our toes into the waters of distributed architecture, we&rsquo;ll be more uncomfortable than we need to be about the disadvantages. While we definitely must be mindful of them, we must also remember this is a new paradigm for us; we&rsquo;ll need to change the way we think. As you&rsquo;ll see later, there are tools available to help us mitigate the disadvantages.</p>
+<h3 id="granularization-example">Granularization Example</h3>
+<p>Earlier, the monolithic process of running a report in current ATLAS was broken down into 7 services. What if it was further broken down and made more granular? Here&rsquo;s how that might look:</p>
+<ul>
+<li>Metadata services:<ul>
+<li>AdHoc Metadata Service</li>
+<li>User Report Metadata Service</li>
+<li>BI Report Metadata Service</li>
+</ul>
+</li>
+<li>Validation services:<ul>
+<li>AdHoc validation service</li>
+<li>BI Report validation service</li>
+</ul>
+</li>
+<li>Pre-processing services:<ul>
+<li>Tokenization service</li>
+<li>SQL transformation service</li>
+<li>Object filter service</li>
+<li>AdHoc compilation service</li>
+</ul>
+</li>
+<li>Report Execution service</li>
+<li>Post-processing service</li>
+<li>Formatting services:<ul>
+<li>Excel formatting service</li>
+<li>PDF formatting service</li>
+<li>Access formatting service</li>
+</ul>
+</li>
+<li>Delivery services:<ul>
+<li>Web delivery service</li>
+<li>Email delivery service</li>
+<li>SharePoint delivery service</li>
+<li>FTP delivery service</li>
+</ul>
+</li>
+<li>Coordinator service</li>
+</ul>
+<p>We&rsquo;ve gone from 1 monolith, to 7 services, to 19 services. Is there value in making the process so fine-grained? Let&rsquo;s revisit the advantages. </p>
+<ul>
+<li>We can now finely control exactly how much of every kind of work we can perform. <ul>
+<li>We run far more BI reports, for example, so we could ensure we have far more BI Report Metadata service instances than AdHoc Metadata instances. </li>
+</ul>
+</li>
+<li>Reporting Studio and other projects could use whichever pieces of this pipeline work for them. <ul>
+<li>One project could use all of it, except it might not allow exporting to Access or delivery via FTP. It may instead add cloud storage delivery. </li>
+<li>It could use a separate coordinator that knows how to integrate the services for its use case, but still consumes many of these same services.</li>
+</ul>
+</li>
+<li>One Email delivery service could crash, but there are at least two instances running at all times. Other delivery types are unaffected. </li>
+<li>All FTP delivery services could simultaneously crash, but other delivery services keep functioning. </li>
+<li>The FTP service fix for the crash affects only the FTP service instances.</li>
+<li>Each of these smaller services could be developed by a different engineer.<ul>
+<li>So long as the contracts between services are well-defined (and they must be no matter how granular the scale), the developer&rsquo;s scope of work is greatly narrowed.</li>
+<li>The small unit can be more easily and completely tested.</li>
+</ul>
+</li>
+</ul>
+<p>Sounds amazing so far. It&rsquo;s super scalable, robust, smooth to develop, and highly reusable. This design checks all of the boxes, right? Well, let&rsquo;s take a look at the disadvantages too.</p>
+<ul>
+<li>There are <strong>nineteen</strong> services.<ul>
+<li>Keeping track of what each of them do, where they live, how they&rsquo;re deployed, their communication contracts, the health of each set of instances, and where along the path a given request currently lies are engineering problems all their own.</li>
+</ul>
+</li>
+<li>A service had to be introduced (the coordinator) to manage the lifecycle of a request, further increasing complexity.</li>
+<li>This example scenario can occur:<ul>
+<li>&ldquo;An FTP service instance just crashed.&rdquo;<ul>
+<li>What happened to the work it was doing? It probably got re-queued.</li>
+</ul>
+</li>
+<li>&ldquo;Now <em>every</em> FTP service instance has crashed.&rdquo;<ul>
+<li>Which message killed the FTP services?</li>
+<li>The logging and correlation metadata had better be very strong; otherwise, prepare to spend hours digging around trying to figure out what happened.</li>
+</ul>
+</li>
+<li>&ldquo;I found the request that killed the FTP instances, but I need to debug through the code to figure out the fix.&rdquo;<ul>
+<li>You must either spin up <strong>nineteen</strong> services on your local machine to step through the process in its entirety&hellip;</li>
+<li>&hellip;turn on some kind of remote debugging (which is insecure and not going to happen)&hellip;</li>
+<li>&hellip;or grab the input for just this particular service, stand it alone up on your workstation, and feed the message through manually.</li>
+<li>The latter option will almost always be the correct answer.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Each of these services introduces a <em>communication overhead</em>.<ul>
+<li>A given request in this design is likely to go through 9 hops before finishing. Assuming a network latency of 5ms and a general API server latency of 5ms, that&rsquo;s 10ms per hop. We&rsquo;ve added almost 100ms in latency to this request just for communication.</li>
+</ul>
+</li>
+<li>Each of these services introduces a <em>resource overhead</em>.<ul>
+<li>A given service instance probably needs a minimum 100 MB of RAM dedicated to it just for framework overhead and runtime. </li>
+<li>Given that we want to have many instances alive for distributing workloads and maintaining a high availability, let&rsquo;s assume we have a total of 100 instances running between all 19 services. That&rsquo;s almost 10 GB of RAM dedicated to overhead.</li>
+</ul>
+</li>
+<li>Each of these services introduces a <em>development overhead</em>.<ul>
+<li>Getting started on each service involves the creation of a new repository, and in some cases, a new project through the PMO.</li>
+<li>Someone has to own this project and manage its deployments.</li>
+<li>There is always some amount of boilerplate code or configuration for setting up a service, even trivial services like a basic website serving plain HTML. </li>
+</ul>
+</li>
+</ul>
+<p>Without any additional tools to help, this sounds rough. However, Kubernetes was created to help mitigate these disadvantages. It is the key to minimizing them. With Kubernetes, we can let go of the need to know and manage where each service lives. We can define how they&rsquo;re deployed via script and get deterministic deployments. We can easily monitor the health of the deployment. We can minimize network overhead and cap resource overhead. K8s alone helps remove a lot of the pain from this 19-service design. On top of that, there are several other tools and methodologies we can employ to reduce the impact, such as serverless (functional) paradigms.</p>
+<p>Is the 19-service design worth choosing, then? Well, realistically, the best design is probably somewhere between the 7-service and 19-service ones. Splitting validation into two services probably does not amplify the microservice advantages in practice. The metadata services aren&rsquo;t likely to benefit from the scalability of being so granular. Reports today don&rsquo;t even <em>support</em> FTP or SharePoint delivery. No matter the scale, though, you&rsquo;re going to run into some of these roadblocks eventually.</p>
+<p>The remainder of this article is going to help you address the disadvantages and roadblocks of microservices at scale. We will cover those tools, methodologies, and patterns that make developing microservices much more fool-proof and allow us to squeeze every last drop of value out of them.</p>
+<h1 id="documentation">Documentation</h1>
+<p>Unsurprisingly, the number one strategy to deal with the unwieldy nature of microservices is to produce reliable documentation. Lack of documentation is a serious business risk that doesn&rsquo;t get enough attention no matter the architecture. Not only is the chance of introducing regressions into existing systems higher, but the tribal knowledge that went into developing and maintaining legacy applications is often lost forever. Documentation helps during development as well: the more informed the team members are about the design, APIs, and philosophy behind them, the better decisions they will make during development. It makes developers more efficient, less stressed, and more cohesive.</p>
+<p>The ugly, unavoidable truth is that documentation is expensive. Producing it—especially when a product or application is being developed by a small and/or tight-knit team—is often unattractive. Frankly, even going through a formal design process at all is sometimes expensive, as developers spend tens of hours expressing on paper what they feel they already know in their minds. Being given the task of writing documentation is seen as &ldquo;getting stuck&rdquo; with it; no one wants to do it. Worst of all, it requires constant maintenance to keep current, as the only thing more harmful than <em>no</em> documentation is <em>bad</em> documentation.</p>
+<p>Given that it&rsquo;s so expensive and cumbersome, yet so important to the success of distributed applications, how can we reduce the cost and still achieve a high quality of documentation? The solution is simple: <strong>centralization</strong>, <strong>automation</strong>, and <strong>prioritization</strong>.</p>
+<h2 id="documentation-centralization">Documentation Centralization</h2>
+<p>The most aggravating thing about keeping documentation current is that it usually lives in multiple places. Code lives in Git, but documentation often lives in some combination of OneNote, SharePoint, and a Word doc in an e-mail someone sent you 6 months ago. As a result, you find yourself flipping between several different places trying to keep track of them all. This wastes significant time, usually tens of minutes per instance as you have to rediscover where everything lives. If documentation were centralized and organized, however, it would be easier to update and effortless to reference.</p>
+<p>To make sure that the documentation is not only discoverable, but free of administrative roadblocks, here are the recommendations for centralizing documentation:</p>
+<ul>
+<li>Documentation is published to a central site.</li>
+<li>All engineers in the company have access to the entire site. The docs are not walled off by teams.<ul>
+<li>This allows people to answer their own questions where possible.</li>
+</ul>
+</li>
+<li>The published documents live in a location wholly dedicated to presenting documentation and nothing else.</li>
+<li>Any existing docs should be migrated to the site over time.</li>
+<li>The pages are logically ordered by projects, domain, and other meaningful categories that minimize navigation time.</li>
+<li>Documentation is centrally searchable.</li>
+</ul>
+<p>At a company of our scale, it should be reasonable to centralize all technical documentation into a single location. If the company grows significantly, the sheer amount of documentation could become impossible for any organization scheme to manage. At that point (and only at that point) we can consider breaking the documentation out into logical sub-units.</p>
+<h2 id="documentation-automation">Documentation Automation</h2>
+<p>You&rsquo;ll notice that this very document lives in a Git repository. It is automatically published via CD to a documentation site, and it&rsquo;s written in Markdown. Each of these is critically important to the upkeep of this document.</p>
+<ul>
+<li><strong>Storing documentation in Git</strong>:<ul>
+<li>Storing docs in Git allows several people to edit the same document and merge changes together trivially. </li>
+<li>It enables deployment integrations.</li>
+<li>It provides free version control. <ul>
+<li>Everyone&rsquo;s been in a situation where the design document was &ldquo;Product Design V4 Final - Final.docx&rdquo; and it&rsquo;s not helpful. </li>
+</ul>
+</li>
+<li>Git is a toolset many developers are already familiar with.</li>
+<li>While Git itself is not the requirement, it happens to fulfill these requirements very well.</li>
+</ul>
+</li>
+<li><strong>Automatic, continuous deployment to the central site</strong>: <ul>
+<li>Documentation is a living thing. It evolves, especially during development. </li>
+<li>Making sure the latest version is always available from an authoritative location is critical to the success of the documentation effort. </li>
+<li>Decisions made against an outdated copy of the documentation are bad decisions by default.</li>
+</ul>
+</li>
+<li><strong>Markdown</strong>: <ul>
+<li>Markdown itself isn&rsquo;t the requirement. The true requirement is that documentation be written in a universal, easy-to-write text-based markup language.</li>
+<li>It must have low friction and lots of tooling in its ecosystem, but still support enough features to be useful. </li>
+<li>HTML is another example option.<ul>
+<li>Although, one could argue that it fails to meet the &ldquo;easy-to-write&rdquo; requirement for someone just trying to hash out some docs. </li>
+</ul>
+</li>
+<li>Markdown is the best of both worlds: HTML support when you need it, easy and intuitive syntax when you don&rsquo;t.<ul>
+<li>Markdown&rsquo;s ecosystem is also how we&rsquo;re able to so effortlessly publish the documentation site. </li>
+<li>In this case, the tool <code>mkdocs</code> generates a site with top-nav and left-nav automatically prepared for you.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The particular combination of Git + TFS deployment + Markdown isn&rsquo;t necessarily the best option. However, it is how this document was published, and this document was published using the same principles that will make other documentation efforts successful. Many products exist which provide the same advantages (e.g. Confluence); feel free to use them. Just keep centralization in mind: the docs need to be in one place.</p>
+<h3 id="other-automation">Other Automation</h3>
+<p>Aside from the automatic deployment of documents to a centralized location, there are other things we can automate to make doc maintenance simpler. Some of these tools we&rsquo;re already familiar with and some of them will be new to us, but each of them is critical to sustainable docs.</p>
+<p>Most important, probably, is the documentation of code itself. Self-documenting code is already a staple of good engineering. When documentation must be written, however, putting the documentation in the code itself is natural for developers. It&rsquo;s more likely to get updated when the functionality changes. Taking it one step further, publishing it automatically can be achieved via several tools (often built into modern IDEs and compilers, like JavaDoc and C#&rsquo;s XML documentation).</p>
+<p>The automatically-generated documentation from code comments is great for internal reference, but what about externally-facing docs? Sometimes the internal docs work for external consumers as well, but often you&rsquo;ll want to add some additional elements to API documentation, such as sample code or visualizations. This is where tools like Swagger UI come into play. Often, in cases like this where external customers will be consuming the documentation, it&rsquo;s also wise to treat the docs <strong>as a deliverable</strong> themselves rather than a byproduct of development. You&rsquo;ll want to devote some time to polishing them up and making sure they&rsquo;re accurate; then, rely on automation to keep them up-to-date.</p>
+<h2 id="documentation-prioritization">Documentation Prioritization</h2>
+<p>You&rsquo;re probably already practicing centralization and automation to some degree. The real trick to help documentation efforts be successful is this one: prioritization. Specifically, acknowledging that some forms of documentation are inherently less valuable than others, and should be given less effort.</p>
+<p>Before we can discuss priority, let&rsquo;s look at the distinct varieties of docs. These definitions aren&rsquo;t exactly standardized, but should certainly be agreeable.</p>
+<ul>
+<li><strong>Architectural documentation</strong> — lays out the concept behind the systems, how they work together, and what the system should achieve. Ensures that the system meets the project requirements. Usually purely conceptual.</li>
+<li><strong>Design documentation</strong> — concretely defines the patterns and idioms to be used in the implementation of the architectural design. Dives into the details rarely, but still paints a solid picture of what the final code will look like. Often combines the conceptual design with practical solutions.</li>
+<li><strong>Implementation design</strong> — The collection of interfaces, code modules, services, and solutions that will be created to reflect the design documentation. Usually purely practical.</li>
+<li><strong>Code documentation</strong> — comments on methods, parameters, and modules that expose intent and usage guidelines for code.</li>
+<li><strong>API documentation</strong> — details the purpose and parameters of an API for internal or external consumers, including the API&rsquo;s communication models. Sometimes, the API documentation and the code documentation are the same thing.</li>
+</ul>
+<p>There are certainly more, but these are the most common and most relevant to our discussion. This philosophy prioritizes documentation in this order:</p>
+<ol>
+<li>Architectural documentation and API documentation.</li>
+<li>Design documentation.</li>
+<li>Code documentation.</li>
+<li>Implementation design.</li>
+</ol>
+<p><strong>Implementation design</strong> is the <em>least valuable</em> type of documentation. Implementation can change constantly, quickly, and sometimes unpredictably (e.g. due to hotfixes). Keeping an implementation design current is essentially equal effort to its corresponding development. It&rsquo;s not worth spending the time to carefully document the code so closely, even after the fact. </p>
+<p><strong>Code documentation</strong> is very important, perhaps the most important type of documentation for a product&rsquo;s technical success. However, it falls low on the list of priorities because <em>it should be happening anyway</em>. No extra effort should be expended to create it. If developers are not documenting their code well, or not writing self-documenting code, actions should be taken to correct the deficiency. When done well, it also serves much the same purpose as the implementation design. Developers should be able to trivially reverse-engineer the meaning and purpose of any component or unit.</p>
+<p><strong>Design documentation</strong> and <strong>architectural documentation</strong> are important because they both capture intangible elements of the design that cannot be easily discovered otherwise. Tribal knowledge, business decisions, design philosophies, and historical context are all made available through these documents. Essentially, they act as the rubric by which the implementation is measured. In an imaginary worst case scenario where the working implementation was lost, you should only need these two documents to produce a new one. It might not be exactly the same, but it will meet the same requirements. Of the two, design documentation is less important than the architectural documentation only because the design can change without affecting the architecture. Imagine the design docs as an implementation of an interface in C#, where the interface is the architecture.</p>
+<p><strong>API documentation</strong>, then, is the only purely-practical piece of documentation that holds a high priority. Much of this effort is spent making sure that your software, which is meant to be consumable since it has an API, is easy to integrate. Maintenance effort spent here, unlike in implementation design, is always worthwhile as it directly contributes to the quality of the product. Additionally, a well-designed API should change fairly rarely (even though the implementation might change constantly), minimizing the upkeep. Further reducing the upkeep are tools that can automatically generate API documentation or assist in creating it, which is never possible for implementation design.</p>
+<h1 id="application-design-philosophy">Application Design Philosophy</h1>
+<p>In the distributed architecture world, it helps to think of application design a little differently. Often, we tend to think of applications as expressions of a product or feature set. Especially when coming from a monolithic n-Tier Architecture background, it&rsquo;s easy to see an application as similar to an engineer itself: when given a problem, it figures out how to solve the entire problem and then solves it. </p>
+<p>For distributed architectures, it&rsquo;s better to instead think of each service as part of an assembly line. The service is responsible for taking the input (let&rsquo;s say a car door) and producing an output (attaching the door to the car). Its only responsibility is to take doors and attach them to cars. In fact, it doesn&rsquo;t even really care about the car or the door; it just attaches door-like things to objects on the expected attachment points. If the attachment points don&rsquo;t exist on either the &ldquo;door&rdquo; or the &ldquo;car&rdquo;, there&rsquo;s a problem.</p>
+<p>As we&rsquo;ll learn later on, even the attachment points can be somewhat flexible. If the door has fewer attachment points than the car, but they still line up, the service might attach them anyway. If the door has more attachment points than the car, but the most important points still line up and the door still fits, the service might attach them anyway. This ensures that we don&rsquo;t need to retrain the service (i.e. rewrite code) when the door or car change slightly. The service can continue trucking along.</p>
+<h2 id="the-10-hops-rule">The 10-Hops Rule</h2>
+<p>The 10-Hops Rule is a <em>guideline</em> invented to help ensure overhead is minimized in microservice designs. The name is pretty self-evident to the philosophy: try to keep the satisfaction of any given user-level request below 10 service hops. </p>
+<p>This is just a guideline. Going over 10 hops doesn&rsquo;t immediately cause the entire design to fall apart like a bad game of Jenga. However, remember that every hop adds some amount of latency overhead—10ms is a good rule of thumb to help with planning. By the time you get to 10 hops, you&rsquo;ve added 1/10th of a second to the processing time of every user-level request simply through service communication.</p>
+<p>The 10-Hop Rule also helps control complexity. If a single request must pass through 50 services on its way to completion, keeping track of where that request is at along the line becomes much more challenging.</p>
+<p>Keep in mind that we&rsquo;re talking about 10 <em>sequential</em> hops. When you&rsquo;ve got some services talking asynchronously to each other, or one service talking to many services at once, you can determine the overhead using a sort of tiered diagram, as shown below.</p>
+<p><img alt="Service Hops By Overhead" src="../images/service-hop-example.png" /></p>
+<p>Note that the third tier&rsquo;s overhead isn&rsquo;t 60ms - service 2 and service 3 finished communicating before service 4, so only 40ms were spent waiting at that tier. To put it simply, each tier has as much overhead as the slowest service in that tier. <em>Complexity</em>, however, is still measured at the total number of services required to satisfy the request.</p>
+<h2 id="fault-tolerance">Fault Tolerance</h2>
+<p>One of the bits of wisdom learned from our forerunners in the microservices space is the importance of building tolerant systems. While tools like Kubernetes allow us to basically infinitely maintain a system through anything but severe crash loops, that doesn&rsquo;t mean a given service&rsquo;s design should depend on such behavior. Every piece of a system&rsquo;s puzzle should still be a <em>complete</em> application; that&rsquo;s one of the benefits of a distributed system. </p>
+<p>Measuring the success of a distributed system by looking at single unit uptimes is a mistake. However, in aggregate, the uptime of the fleet contributes to the system&rsquo;s <a href="#important-terms">uptime of scale</a>. In other words, if your services are constantly crashing and having to start up again, you&rsquo;re wasting processing time and potentially impacting metrics. This is the lesson others have learned: ensuring that the system&rsquo;s units are tolerant of faults and errors is critical to maintaining a healthy ecosystem.</p>
+<p>There are, of course, times when the application must crash. This should usually be mitigated to infrastructure-level errors that are unrecoverable. Otherwise, the top priority is making sure that the service is able to recover cleanly from these sorts of concerns:</p>
+<ul>
+<li>Bad or malformed input</li>
+<li>Erroneous requests</li>
+<li>Common runtime exceptions</li>
+<li>Temporary resource unavailability (and other transient faults)</li>
+<li>Service-to-service contract mismatches</li>
+</ul>
+<p>Tolerance doesn&rsquo;t just mean recovering from issues without crashing or corrupting internal state. Tolerance can also mean being lenient on how many problems can exist in an input while still being actionable, for example. The objective is to ensure that small changes in service-to-service communication, transient faults, miscommunications, file I/O issues, and such do not cause misbehaviors in the application. </p>
+<p>Additionally, we want to ensure that compatibility remains high. APIs should be designed in such a way to facilitate evolution without requiring changes on consumers. System infrastructure changes (for example, changing the URI of a resource) should be mitigated through tools like Kubernetes, where they can be abstracted from the beginning, or obviated through a no-deploy central configuration mechanism (again, perhaps in Kubernetes).</p>
+<h3 id="avoiding-retry-storms">Avoiding Retry Storms</h3>
+<p>You might have read the previous section and thought, &ldquo;Great! I can make sure all my service-to-service requests are tolerant trivially. I&rsquo;ll just add a retry to the request!&rdquo; Congratulations, you just introduced a flaw that could take down the entire system—maybe the entire data center.</p>
+<p>The difficulty in distributed systems is the scale: you might have 100 instances of a given service running, all getting requests at the same time. These 100 instances may, themselves, depend on another fleet of services, and them another set, and so on. If Service F becomes unresponsive for some reason—say a network resource temporarily becomes unavailable or something like that—then you end up with a traffic jam at that service. All of Service E backs up now, followed by Service D, C, B, and eventually A. It becomes a standstill.</p>
+<p>&ldquo;That&rsquo;s OK,&rdquo; you say. &ldquo;As soon as the network resource becomes available again, the jam will resolve.&rdquo; Perhaps that&rsquo;s true, except that Service E is programmed to retry its accesses to Service F. It turns out that Service D also retries its accesses to Service E, and Service C does the same with Service D. A lot of applications like to use ~1 second as a retry wait between attempts&hellip; </p>
+<p>Suddenly you have an exponential explosion of network traffic, as every service in the entire ecosystem starts retrying at the exact same time over and over. Services crash entirely because they starve themselves of network resources, infrastructure dies due to excessive load, and you more or less DDoS the data center from the inside. This is a <strong>retry storm</strong>, similar to the classic <a href="https://en.wikipedia.org/wiki/Thundering_herd_problem">Thundering Herd Problem</a>. Thankfully, it&rsquo;s easily mitigated.</p>
+<p>Principles of avoiding retry storms:</p>
+<ul>
+<li>Know when to implement retries at all.<ul>
+<li>As recommended by Microsoft&rsquo;s <a href="https://docs.microsoft.com/en-us/azure/architecture/best-practices/transient-faults">general guidance on retries</a> (for Azure, but applicable to any distributed system), it&rsquo;s not usually wise to implement retries at every service along the path of fulfilling a request. In many cases, the onus of retrying should be on one service—usually the one most user-facing—or the client application itself.</li>
+<li>This removes several aggravating factors from the retry storm scenario.</li>
+</ul>
+</li>
+<li>Never infinitely retry. Eventually, allow the service to fail the request. <ul>
+<li>The threshold for this will differ based on use case, but there comes a time that the request can simply no longer be fulfilled.</li>
+<li>Usually, this is implemented as a cap on the maximum number of retries.</li>
+</ul>
+</li>
+<li>Never retry at the same interval between each attempt. <ul>
+<li>Always use some sort of back-off strategy to ensure that your retries become less and less as the issue persists.</li>
+</ul>
+</li>
+<li>Introduce some randomization to your retry intervals. <ul>
+<li>That way not every instance backs-off and retries at the same time (in the case where they all run into issues at similar times).</li>
+</ul>
+</li>
+<li>Consider implementation of the <a href="https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker">Circuit Breaker</a> pattern instead of naïve retries.<ul>
+<li>This can be especially valuable when communicating with external services where failure is more likely to occur and be unrecoverable (as far as we&rsquo;re concerned).</li>
+<li>However, it can also hold value within ATLAS when communicating with highly-shared services like ATLAS Platform functionality—your application should more or less behave as though those services are external.</li>
+</ul>
+</li>
+</ul>
+<p>These mitigations cannot completely eliminate retry storms. No matter what, they will occur to some degree any time the system ends up in a bottleneck state and the bottleneck becomes clogged. By following these guidelines, however, the impact can be minimized.</p>
+<h2 id="communication-contracts">Communication Contracts</h2>
+<p>One of the pesky recurring problems of software design is the management of communication contracts between services. Whether it&rsquo;s an evolving API, a code-level interface, or the response model from a service, it seems like a common source of regressions whenever two applications need to talk to each other. Since distributed architectures are built entirely on the concept of applications talking to each other, they can sometimes be especially prone to problems arising from miscommunication.</p>
+<p>There is no &ldquo;magic bullet&rdquo; solution to the issue of communication between applications. In each instance, for both the API into an application and the responses coming out, one must exercise caution and diligence in design. As a general philosophy around how to design your communication contracts, try to follow Postel&rsquo;s Law.</p>
+<blockquote>
+<p>An implementation should be conservative in its sending behavior, and liberal in its receiving behavior. <br />
+— <a href="https://en.wikipedia.org/wiki/Jon_Postel">Jon Postel</a></p>
+</blockquote>
+<p>To break this philosophy into more digestible chunks:</p>
+<ul>
+<li>Ensure your communication is as brief, small, and relevant as possible.<ul>
+<li>This also means making sure your APIs are designed appropriately, such that each call is responsible for as little as possible.</li>
+<li>Responses from services should be very concise and contain only the immediate response to the request.</li>
+</ul>
+</li>
+<li>Where possible, use schema-less models.<ul>
+<li>Serializing and deserializing JSON or XML objects seems like a natural fit for service communication, but those formats enforce a schema that must be adhered to.</li>
+<li>If the schema is not met, the object will not deserialize, breaking the contract. </li>
+<li>This often causes minor changes to have a ripple effect throughout an ecosystem; even correcting a typo in an API spec can be impossible due to the massive number of consuming applications.</li>
+<li>One example schema-less pattern is <a href="https://martinfowler.com/bliki/TolerantReader.html">the <code>TolerantReader</code> pattern</a>.</li>
+</ul>
+</li>
+<li>Where possible, avoid discrete versioning.<ul>
+<li><em>(For example, moving from <code>/api/v1/</code> to <code>/api/v2/</code> is a discrete version change.)</em></li>
+<li>Never mark a new version for every change to the API.</li>
+<li>Creating a new API version implies that the old version must be supported—not just individual pieces of it, but the entire contract. This requires the creation and enforcement of SLAs around its lifetime, deprecation, and eventual discontinuation.<ul>
+<li>In the meanwhile, you likely incur technical debt supporting two different contracts.</li>
+</ul>
+</li>
+<li>Versioning is painful for consumers. It forces them to adopt a new contract which, even with good documentation or release notes, requires thorough review and potential downstream overhauls. It discourages adoption of your API.</li>
+<li>That said, there are some scenarios where overhauls of your contract are required. In those scenarios, versioning can make sense.</li>
+<li>Probably best practice is to leave the API open for versioning (e.g. <code>/api/v1/</code>) but only take advantage of it when <em>absolutely</em> required.</li>
+</ul>
+</li>
+<li>Utilize abstractions to remove dependencies on the contract details.<ul>
+<li>This allows your logic to be ignorant of contract changes, except in the single source of translation (where the contract object becomes a DTO).</li>
+</ul>
+</li>
+<li>Be explicitly backwards compatible&hellip;<ul>
+<li>If you must advance your API version to v2, for example, create an SLA that dictates how long you will continue to support the v1 API.</li>
+<li>Ensure API consumers are informed of this SLA so that appropriate accommodations can (eventually) be made.</li>
+</ul>
+</li>
+<li>&hellip;but not forever.<ul>
+<li>One of the flaws of supporting a highly-tolerant system for a long time is the accrual of technical debt in supporting many layers of backwards compatibility.</li>
+<li>Once a contract has been obsoleted, make and adhere to a plan to remove it entirely.</li>
+<li>Disable it programmatically, if possible, to reduce maintenance cost.</li>
+</ul>
+</li>
+<li>When the API must change, try to make only additions.<ul>
+<li>Given the above guidelines, adding to an API will not break existing consumers even if the new endpoints obsolete the old ones.</li>
+<li>Remember that the obsolete endpoints should be removed at a planned, communicated time.</li>
+</ul>
+</li>
+<li>Have a clear definition of the required attributes in a contract, and concern yourself only with those.<ul>
+<li>To put it another way, your code may not be the only consumer of the service, and therefore the response may contain properties you don&rsquo;t recognize. Discard them.<ul>
+<li>On the other hand, if your code <strong>requires</strong> certain properties from the service&rsquo;s response that aren&rsquo;t supplied, and those properties were previously part of the contract, you have an error scenario.</li>
+</ul>
+</li>
+<li>Or, for the same reasons, the API endpoints may support properties or parameters that your logic isn&rsquo;t aware of. Ignore them.<ul>
+<li>If the service <strong>requires</strong> that your call provide attributes/parameters it can&rsquo;t possibly supply, you have a contract issue. </li>
+<li>It only introduces regressions to attempt to force contract compatibility with &ldquo;fake&rdquo; parameters or <code>null</code> values (unless the API docs specifically indicate <code>null</code> as a way to opt-out of that parameter). Even if it works, you&rsquo;re taking dependencies on incidental behaviors, which violates any contract.<ul>
+<li>The service owner is not required to uphold incidental behaviors, which means your consuming logic is doomed to fail.</li>
+</ul>
+</li>
+<li>Instead, where possible, reach out to the owner of the service and figure out how to reconcile the contract.</li>
+<li>If no reconciliation is possible, you&rsquo;ll need to either legitimately acquire the missing attributes/parameters (perhaps from another service) or find a different service to fulfill your request.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Obviously, there can be exceptions. This is a set of guidelines, not rules. Just remember that every compromise on this philosophy increases the chance of regression and the cost of maintenance in the communication between applications.</p>
+<h1 id="deployment-tactics-and-service-management">Deployment Tactics and Service Management</h1>
+<p>Creating an application is about more than just building the systems. You also must design and implement the deployment and management strategies for the application. Organizations (including ours) often have methodologies for these DevOps tasks whether they have dedicated DevOps engineers or not, but with distributed architectures it&rsquo;s critically important that these existing strategies are rethought. The rigors of these systems are often more complex, although not necessarily more challenging, than monolithic systems. It is ultimately more beneficial to discuss the health of a distributed system in terms of <a href="#important-terms">uptime of scale</a> rather than traditional metrics.</p>
+<p>It is strongly recommended that each project team have at least one member fulfilling a DevOps role to design, build, manage, and monitor the deployment of complex distributed applications. However, this isn&rsquo;t always feasible for a number of reasons. As a result, the entire development team for a project backed by microservices should be fully aware of these tactics, strategies, and patterns for successfully administering and managing the application. To be successful, <em>everyone</em> must participate in DevOps.</p>
+<h2 id="service-level-agreements-slas-and-metrics">Service-Level Agreements (SLAs) and Metrics</h2>
+<p>Especially when dealing with services at a scope typical of microservice architecture, it is necessary to clearly define SLAs for systems. Without solid lines for &ldquo;success&rdquo; and &ldquo;failure,&rdquo; these states are open to interpretation both from customers and internal stakeholders. Inevitably, your team will find itself constantly failing as the goal posts move based on shifting priorities, customer happiness or unhappiness, and internal perception. Establishing these contracts (in the abstract sense, though sometimes also literally) allows you to take control of the success and failure states and base them on concrete, measurable metrics.</p>
+<p>SLAs are comprised of one or more service-level objectives (SLOs). Your ability to base the SLOs on actual metrics ties directly to your system&rsquo;s ability to measure them. Thus, it&rsquo;s incredibly important to make recording metrics a <em>first-class</em> item of your design. Even if the metric isn&rsquo;t used as part of an SLA, record it anyway. The more data you have about the operation, state, and throughput of a system, the more information you have to diagnose issues.</p>
+<h3 id="good-slas-vs-bad-slas">Good SLAs vs. Bad SLAs</h3>
+<p>The successful implementation of SLAs requires that they meet several criteria. The only meaningful SLA is one that actually has value and can be measured; if it can&rsquo;t be measured or it can&rsquo;t be met, it&rsquo;s not useful.</p>
+<p><strong>SLA requirements:</strong></p>
+<ol>
+<li>It must be achievable through normal maintenance and upkeep.<ul>
+<li>In other words, the SLA must not require over-allocating staff or working overtime in order to meet it.</li>
+<li>It must be achievable and reasonably future-proof with infrastructure that exists at the time of the agreement.</li>
+<li>An SLA that requires overtime, over-allocation, or lacks proper infrastructure is doomed to fail, and therefore not a valid SLA.</li>
+</ul>
+</li>
+<li>SLOs must be measurable. The metrics must be mathematically significant and defined within the agreement.<ul>
+<li><em>&ldquo;The customer must be kept happy&rdquo;</em> is not a valid SLA because it&rsquo;s not measurable.</li>
+<li><em>&ldquo;Customers must rate our service at least a B+ on surveys&rdquo;</em> is not a valid SLA because it&rsquo;s not mathematically significant; there is no meaning to the measurement.</li>
+<li><em>&ldquo;The queuing system must be capable of handling peak load&rdquo;</em> is not a valid SLA because while peak load is measurable, and throughput rates are mathematically significant, neither of these thresholds are defined in the agreement. <ul>
+<li>Not defining boundaries and thresholds in the agreements leads to scalability problems—peak load will naturally increase over time given company growth, creating an inevitability where the system will fail to meet SLA.</li>
+<li>This is why you tend to see SLAs around uptimes and MTBF (mean time between failure) measurements: the target number is measurable, significant, and made part of the agreement.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>It must be honored.<ul>
+<li>Obvious? Yes, but it should be reinforced: defining an SLA that will never be upheld creates friction on all fronts, wastes significant effort, and spends trust.</li>
+<li>Trust is the most valuable currency we have with both internal and external stakeholders. Spending it frivolously is not wise.</li>
+<li>It is better to have no SLA than to define one you can never (or will never) honor.</li>
+</ul>
+</li>
+<li>The responsible team must be held accountable for failures to meet SLA.<ul>
+<li>Given rule #1—that the SLA is achievable—if the team fails to meet SLA, actions must be taken. </li>
+<li>This does <em>not</em> necessarily imply punitive action; rather, a plan must be formulated to bring the service back into compliance and executed immediately.</li>
+<li>Some sort of post-examination of the violation should be conducted. <ul>
+<li>Perhaps the environment has changed such that the SLA is no longer maintainable, which should be easily validated with metrics. <ul>
+<li>Often, simple scaling or software tweaks can bring a service back into compliance.</li>
+</ul>
+</li>
+<li>Possibly, the team doesn&rsquo;t have enough resources or people to meet SLA.</li>
+<li>Sometimes, a defect in the software may cause a violation of SLA.<ul>
+<li>A fix should be identified, tested, and fast-tracked into deployment.</li>
+<li>Depending on the frequency of this type of violation, a broader look should be taken at the team&rsquo;s quality practices. Adjustments may need to be made to methodology.</li>
+</ul>
+</li>
+<li>It is possible that the team simply failed to be responsible. <ul>
+<li>Assuming that the company is hiring strong staff with good priorities, this should be fairly rare. It&rsquo;s often mixed up with one of the other issues due to a poor root cause analysis, though it certainly does occur on its own.</li>
+<li>These scenarios will be handled by the unit&rsquo;s usual method of addressing underperformance.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>It must provide business value.<ul>
+<li>Creating an SLA around 99.999% uptime and a six-month MTBF is great if customers are paying to justify that level of service. Adhering to those standards, however, requires herculean effort and resources. </li>
+<li>If customers don&rsquo;t need it (or aren&rsquo;t paying for it), why waste the time, money, and effort providing it?</li>
+<li>This isn&rsquo;t to say that only customer-facing SLAs are important. Internal SLAs are just as important, if not more so since they directly prop up the external ones.</li>
+<li>Instead, focus on determining the level of service you need to guarantee, and build SLAs on that.</li>
+</ul>
+</li>
+</ol>
+<h3 id="slas-and-microservices">SLAs and Microservices</h3>
+<p>This section on SLAs exists in this document because of the intrinsic link between the upkeep and management of a highly distributed system and the need for clear SLAs. By definition, the parts of a distributed and/or modular system will fail. Applying the usual monolithic architecture mentality to these failures will cause nothing but overreactions and negative perceptions. At sufficient scale, all distributed systems are <em>some degree of &ldquo;down&rdquo;</em> at all times.</p>
+<p>The good news is: that&rsquo;s fine. It may be concerning to plan for a system where failures are commonplace, but part of the philosophy here is that failures are commonplace in every system, distributed or not. In microservices, you have the opportunity to plan for them and mitigate them architecturally. The highly-available, widely-scaled, and fault-tolerant nature of these services means that individual failures are of no concern. Instead, you watch for systemic issues and measure health in terms of <em>uptime of scale</em>—this is why we must have strong SLAs. They help provide a measurable criteria for health and success.</p>
+<p>This measurable criteria can be called the <em>steady state</em> of intended behavior or throughput. As it turns out, the steady state and your system&rsquo;s SLAs go hand-in-hand; they&rsquo;re intrinsically bound. The primary way to identify systemic issues at scale is to compare the current state against the steady state.</p>
+<h2 id="the-stoplight-strategy">The Stoplight Strategy</h2>
+<p>To help with the management and monitoring of our distributed systems, a strategy has been devised to amplify the discoverability of systemic issues. This is the Stoplight Strategy. The idea is simple: a given system&rsquo;s state can be represented depending on how closely it is currently adhering to steady state. Our existing monolithic system is either up or down, but distributed architectures have a whole gradient of grey area in between. As alluded to earlier, most distributed systems at scale are always <em>some degree of &ldquo;down&rdquo;</em>. The definitions of success and failure have to change. This leads us into a metric-based, SLA-oriented model of defining <span style="color: green;">green</span>, <span style="color: #AAAA00;">yellow</span>, and <span style="color: red;">red</span> system states. </p>
+<p>It is critically important that we define the thresholds, SLOs, and criteria for a system&rsquo;s <span style="color: green;">green</span>, <span style="color: #AAAA00;">yellow</span>, and <span style="color: red;">red</span> states early and concretely. They must be reevaluated often in order to keep in sync with the current SLAs and demands.</p>
+<p><span style="color: green;">Green</span> state is when we meet or exceed the established expected performance, uptime of scale, latencies, throughputs, etc. of the system. All SLOs are being met or exceeded.</p>
+<p>Once we know our <span style="color: green;">green</span> state, we can start to define our <span style="color: #AAAA00;">yellow</span> state. The <span style="color: #AAAA00;">yellow</span> state is an operational state, but may be suffering from factors that impact user experience. Examples include high latencies, dangerously low uptime of scale, or an abnormal number of errors across the system in a given time window. The <span style="color: #AAAA00;">yellow</span> state is incredibly important because it indicates two things:</p>
+<ol>
+<li>Failure is imminent</li>
+<li>There is an opportunity to improve the state of the system before failure occurs</li>
+</ol>
+<p><span style="color: red;">Red</span> state occurs when some part of the system is fully down, or at least one SLO is not being met.</p>
+<h3 id="the-stoplight-strategy-in-practice">The Stoplight Strategy In Practice</h3>
+<p>Important to keep in mind is that a <span style="color: green;">green</span> state doesn&rsquo;t necessarily indicate that the system is 100% healthy. It only indicates that the system is exceeding the criteria we&rsquo;ve established, and that&rsquo;s OK. We might still look at other metrics to evaluate whether there are concerns to be investigated, but assuming the <span style="color: green;">green</span> state is well-defined, the system is working as expected. Any concerns found should not be critical, though it is wise to be on the lookout for trends that will lead the system into a <span style="color: #AAAA00;">yellow</span> state eventually.</p>
+<p>On the other hand, being in <span style="color: #AAAA00;">yellow</span> state means that investigations should begin immediately. While the state is not critical yet, it usually indicates that it <em>will become critical</em>. If a system is in the <span style="color: red;">red</span> state, it should be considered completely down, even if it might still be servicing some requests.</p>
+<p>The intentions behind this strategy are almost more important than the strategy itself:</p>
+<ul>
+<li>A clear guideline and goal for establishing the metrics and monitoring around a system</li>
+<li>An implied dashboard that monitors the state and metrics of many systems using the same <span style="color: green;">green</span>/<span style="color: #AAAA00;">yellow</span>/<span style="color: red;">red</span> indicators, even if the criteria differs between them, to provide an &ldquo;infrastructure at a glance&rdquo; view</li>
+<li>A simple way to report on the current status of any given system for any stakeholders, internal or external</li>
+</ul>
+<p>You might notice that this system bears many similarities to something like <a href="https://status.azure.com/en-us/status">Azure&rsquo;s Service Status</a> page. This is fully intentional. The two strategies serve the same purpose, though for slightly different audiences. In fact, there&rsquo;s a lot of value in providing an internal version with greater detail and a version for customers that gives a different, simplified perspective.</p>
+<p>A simple stoplight-inspired indicator of state will <strong>never</strong> be sufficient to thoroughly monitor system states. It is not intended to be the only metric of health, or the only touchpoint of support. However, it does provide an easy-to-understand and quick reaction pivot point for all involved engineers. One of the problems in many of our existing systems is that we have a hard time saying—at even a basic level—whether they&rsquo;re healthy or not. We almost completely lack visibility. We have difficulty reacting quickly to changes in state, because there is no human-readable way to get state at a glance. This indicator helps by acting as a canary for potential issues.</p>
+<h2 id="ci-and-cd">CI and CD</h2>
+<p>CI (Continuous Integration) and CD (Continuous Deployment, in this case) are vital practices to maintaining a distributed application. A quick definition for each to help set context:</p>
+<ul>
+<li><strong>Continuous Integration</strong>: developers push code to a central repository, from which the commits are immediately built and tested (via automated unit tests) to ensure valid and well-integrated code has been committed.</li>
+<li><strong>Continuous Deployment</strong>: once validated by the CI process, the new version of the application is published and automatically deployed into production, most often via zero-downtime strategies.<ul>
+<li>This is different from <em>continuous delivery</em>, where the application is built, validated, and published, but not yet deployed into production. It must be deployable, but the deployment occurs manually.</li>
+</ul>
+</li>
+</ul>
+<p>Together, these processes help us control the complexity of distributed architectures. By employing CI, we ensure that each unit of the application is always in a good state—that is, not completely broken or poorly integrated. Regressions are mitigated by automated testing. Most development teams use some form of CI today; there is likely no value in going further preaching its benefits.</p>
+<p>Continuous deployment is a more challenging process, but it too ensures that the application&rsquo;s units remain in a good state. The continuous <em>delivery</em> strategy is part of continuous <em>deployment</em>: the units must be easily deliverable and always deployable. However, going the extra step into automatically deploying units as soon as they&rsquo;re ready provides a ton of value, <strong>assuming your infrastructure and design is capable of zero-downtime deployments</strong>.</p>
+<ul>
+<li>The time-to-value for a given change is significantly reduced.<ul>
+<li>Fixes deploy much faster, and improvements are delivered to users as soon as possible.</li>
+</ul>
+</li>
+<li>The process overhead of deployment is removed entirely.<ul>
+<li>There is an argument that the overhead is simply moved elsewhere in the workflow, usually manifesting as holding commits into <code>master</code> until they&rsquo;re ready for deployment. </li>
+<li>This is more desirable than delaying the deployment in later stages, as the roadblocks can be removed in case of emergency. </li>
+<li>Fixes can deploy as fast as code can be committed, instead of however long it takes a human to find the latest build, ensure it&rsquo;s valid, and initiate a manual deployment.</li>
+</ul>
+</li>
+<li>The <code>master</code> branch always represents the deployed code.<ul>
+<li>This allows teams to know, trivially, the state of the production environment, without having to accommodate for whether the code has been deployed yet or not.</li>
+<li>In a monolithic environment this is a non-issue, but in a distributed environment it becomes a morass of confusion.</li>
+</ul>
+</li>
+<li>Better application design is encouraged in order to support zero-downtime deployments.<ul>
+<li>Specifically, this encourages designs that are completely stateless, which has tons of knock-on benefits in terms of resilience and scalability.</li>
+<li>It all but requires a faster, more efficient, and lower friction database design, often leaning on databases which deploy as part of the application or schema-less technologies that prevent roadblocks on shared databases.</li>
+</ul>
+</li>
+<li>Continuous deployment acts as a sort of CI for your distributed system.<ul>
+<li>The goal of CI is to be constantly validating that your commits integrate well with the codebase.</li>
+<li>Continuous deployment allows you to constantly validate that your commits integrate well with <em>the entire system</em>.</li>
+<li>In CI, you continuously commit to the central repository to shorten the window of time in which your work could have gone out of sync with the codebase—e.g. due to others&rsquo; commits.</li>
+<li>In CD, you continuously deploy units for the same reason: to shorten the window of time in which your work could have gone out of sync with the rest of the system—e.g. due to changes to other units.</li>
+<li>Also similarly to CI, regressions are discovered immediately, instead of whenever the commit happens to deploy.</li>
+</ul>
+</li>
+</ul>
+<p>This has been implied above, but each unit of your distributed application should be a separate CI/CD pipeline. In other words, each unit should be capable of building and deploying independently of other units. Thanks to tools like Kubernetes and Docker, this becomes significantly more straightforward. </p>
+<p>Docker allows each unit to dictate its own build process in a Dockerfile. Kubernetes makes it simple for it to declaratively define its deployment in a <code>.yaml</code>. As these are (mostly) universal concepts, we no longer need to rely as much on extensive custom build and deploy scripts in a system like TFS. For monolithic applications, it isn&rsquo;t the <em>worst</em> thing in the world to write custom build/deploy scripts, but at distributed scale it&rsquo;s impossible to maintain. </p>
+<h3 id="example-ci-and-cd-workflow">Example CI and CD Workflow</h3>
+<p>Here&rsquo;s an example of how our CI/CD workflow might look. This isn&rsquo;t exactly how our actual workflow will look, but it should help demonstrate the concepts.</p>
+<ol>
+<li>A developer named John Doe makes changes to the code in a branch. Let&rsquo;s call it <code>john.doe/feature-branch</code> for example&rsquo;s sake.</li>
+<li>John commits code to <code>john.doe/feature-branch</code> during active development.<ul>
+<li>If necessary, John has a path on the Docker registry (e.g. Harbor) for pushing images manually for testing, though they cannot push to certain protected paths like the root.</li>
+<li>A Test environment exists as well for manually testing deployments and for testing units (or whole applications) at scale without affecting Production resources.</li>
+</ul>
+</li>
+<li>After development and initial testing, a pull request is submitted to merge <code>john.doe/feature-branch</code> into <code>master</code>.</li>
+<li>The PR contains not just code changes, but potentially build and deploy changes as well. The repository&rsquo;s policy requires that the DevOps group approve the PR if the build and/or deployments change, in addition to the usual approvals.</li>
+<li>The DevOps group and the usual suspects approve the PR. It merges into <code>master</code>.</li>
+<li>The build server detects a change to <code>master</code> and initiates the CI process.<ul>
+<li>The image is built and automated tests are executed.</li>
+</ul>
+</li>
+<li>Assuming the build and tests pass, the new image is pushed to the registry under a specific version number.</li>
+<li>After the image is pushed to the registry, it is vulnerability-scanned. Assuming the scan completes successfully, the CI process is complete. The image is tagged as <code>latest</code> in the registry.</li>
+<li>Now the CD process begins. The build server initiates a deployment of the Kubernetes <code>.yaml</code>.</li>
+<li>Since the DevOps group signed off on the PR, the deployment should be safe. Using k8s mechanisms for upgrading deployments, the existing pods are rolled off one-by-one, with new ones created in their place.</li>
+<li>Assuming the deployment enters a good state before a configured timeout passes, the CD process is complete.</li>
+<li>The new unit can be considered fully deployed now.</li>
+</ol>
+<h1 id="summary">Summary</h1>
+<p>After a pretty solid amount of research and evaluation, this document contains the current philosophy around ATLAS&rsquo;s approach to distributed and microservice-oriented architectures. This philosophy will change with time and experience, but it represents our idealistic strategy at the time of writing. As mentioned in the first section, we always want to design the &ldquo;correct&rdquo; implementation first. Make compromises only when the correct design is unachievable, and make them as small as possible. If you begin designing from a compromising mindset, your design will not reach the heights it may have otherwise been able to reach despite limitations and setbacks. </p>
+<p>The collection of strategies around implementing distributed architectures are a first draft. These, too, will expand and evolve as we gain experience. Perhaps the idea of a &ldquo;stoplight&rdquo; system of measuring system health is too naïve to bring value, or perhaps it&rsquo;s too complex for the target audience even as presented. Maybe it turns out that the Circuit Breaker pattern just doesn&rsquo;t work for us. It&rsquo;s possible that continuous deployment turns out incompatible with our team structures. Most likely, we will add powerful solutions we discover along the way. At no point should this document be considered final or even authoritative. </p>
+<p>The document is, however, a set of guidelines and philosophy that should help everyone work into this new way of thinking. This is its only true objective. Putting yourself into the mindset for successfully creating a distributed system—that is, avoiding the common pitfalls and long-term pain points that often plague distributed systems built by monolithic teams—requires more than a basic understanding of the tools. It requires a philosophical and fundamental shift in many of the assumptions and basic foundations that we build up after years of experience. As alluded to before, distributed systems have existed since the birth of networked computing. Today they&rsquo;re just easier than ever before to create and manage. The tools we have now make designs practical that were once infeasible.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

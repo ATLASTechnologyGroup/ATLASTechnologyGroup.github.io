@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Kubernetes Deployment Guidelines - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Conventions/api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../distributed-architecture-strategy/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../../Projects/database-and-schema-design-guidelines/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#kubernetes-deployment-guidelines">Kubernetes Deployment Guidelines</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="kubernetes-deployment-guidelines">Kubernetes Deployment Guidelines</h1>
+<p><a href="https://stackoverflow.com/c/atlastechnology/articles/49">https://stackoverflow.com/c/atlastechnology/articles/49</a></p>
+<!--
+
+| Warning |
+| --- |
+| This document is still a work in progress. Notifications will be published to Slack when new sections are added. |
+
+When creating resources in Kubernetes, there are a few good practices to learn and several recommended approaches you can follow that will help you optimize your deployments. 
+
+[TOC]
+
+# Writing Manifests
+
+Perhaps the most important part of using Kubernetes is understanding how to write the YAML manifests for your API objects that best represent your intended deployment. They can be quite shallow or incredibly deep, depending on how complex your application is. However, knowing some important concepts, tricks, and guidelines will help you get the most out of k8s with the fewest lines of YAML.
+
+## Namespacing
+
+Keep as many of your application's resources and dependencies as possible within a namespace dedicated to it. For example, if your application is Report Runner, place your k8s resources in a namespace like `report-runner`. This is not only organizationally beneficial, it also lines up with our security model (where users tend to have access only to namespace-level resources) and makes many DevOps procedures simpler.
+
+There are valid arguments, in larger systems, for splitting the dependencies across many namespaces. Even here, however, those namespaces should be dedicated to your system. In some scenarios it will not be possible to contain everything within dedicated namespaces. Creating a Postgres cluster using the Crunchydata Postgres Operator, for example, will place your Postgres instance in the `pgo` namespace. Sadly, at the moment there are no recommendations for easing DevOps maintenance in these situations.
+
+## Kustomize is Your Friend
+
+One of the most aggravating parts of Kubernetes is actually creating or updating your objects. You've got them all defined in manifests, but creating or applying them individually is a hassle. Then, if you need to delete them, you've got to remember which objects are part of your deployment. 
+
+[Kustomize](https://kustomize.io/) makes the process of grouping resources together much easier. Not only that, it also solves several other common problems with Kubernetes deployments. Some examples:
+
+* Differing resources between environments using overlays
+* Transforming image references to make deployments deterministic while preventing resource YAML from getting stale
+* Patching manifests to change resources with deploy-time decisions
+* Ensuring resources end up in the right namespace
+
+To put it another way, Kustomize is the finishing piece that makes a Kubernetes release its own concept, rather than just a collection of manifests.
+
+### Kustomize CLI vs. `kubectl`
+
+Kustomize is provided in two separate ways. Originally, it was always a CLI tool and could only output a transformed, concatenated manifest. However, in Kubernetes 1.14, it became part of `kubectl` as well. Now, one can `kubectl apply -k` and automatically transform the `kustomization.yaml` and apply the result without any intermediary steps.
+
+Be warned: at the time of writing, the version of Kustomize within `kubectl` is much older than the latest stable version. There have been breaking changes in the format of `kustomization.yaml`, and as such there are incompatibilities between those generated by new Kustomize and those supported by `kubectl -k`. The supported version of Kustomize within `kubectl` [can be found here](https://github.com/kubernetes-sigs/kustomize).
+
+You'll find that there are operations you can perform using Kustomize CLI that cannot be performed using `kubectl`'s built-in version. If you need to take advantage of that functionality, be sure to use a supported version of Kustomize.
+
+## Naming and Path Conventions
+
+See the [Docker and Kubernetes Conventions](../Conventions/docker-and-k8s-conventions.md) document.
+
+## Resources 
+
+When specifying containers within a manifest, you should always provide both requests and limits for CPU and memory. For example ([pulled from here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-units-in-kubernetes)):
+
+
+wzxhzdk:0
+
+
+This spec declares two important things:
+
+1. The container needs at least `64Mi` of memory and `250m` CPU "available" (that is, _unreserved_ by other `requests`) to be scheduled.
+1. The container shall not be allowed more than `128Mi` of memory and `500m` CPU.
+
+These statements are very important. In most scenarios, there's no value in allowing the scheduling of workloads that will not receive enough resources to do work. Adding `requests` for the absolute bare minimum amount of CPU/memory your container can function with (often lower than you think) ensures that scheduled pods aren't immediately starved.
+
+Similarly, attaching considerate `limits` to the container guarantees that (unless the limits are too high) the container can never dominate an entire node. No matter how well you think you've designed an application, it's not harmful (barring a few very rare scenarios) to cap the resource usage anyway.
+
+### Determining Appropriate Requests and Limits
+
+One of the most amazing things about Kubernetes is its ability to take hardware and slice it up very finely (compared to, say, a VM). This, combined with its scheduler, means that workloads can be very declarative about the resources they need and k8s will do its best to find a node with enough room for it. Participating in this process, and therefore getting the most out of our hardware, requires that we provide that declaration of resources.
+
+However, settling on the right numbers for your containers can be somewhat confusing. Here are some guidelines to help.
+
+**Requests**:
+
+* Remember that your resource requests act somewhat like reservations on the cluster. 
+     - As an example: pretend you have a Kubernetes cluster with 1 worker node. This node has 4 vCPUs.
+     - If you schedule 3 pods that each request `1200m`, the cluster knows that you've requested 3600/4000 available CPU. 
+     - If you attempt to deploy a fourth `1200m` pod, it will fail to schedule--there aren't enough resources in the cluster to meet the CPU request.
+     - If you were to then add another worker with 4 vCPUs to the cluster and try again, the pod would be able to schedule to the new node.
+* Also remember that k8s will usually intelligently schedule your work.
+     - Going back to the example from the first point, if you had started with two nodes, k8s probably wouldn't have loaded down worker #1, then switched over to #2. Instead, it probably would have scheduled them evenly across the nodes so that two were on each worker.
+     - However, the scheduler is non-deterministic and sometimes acts on factors that aren't immediately obvious. Frankly, sometimes it does dumb things. 
+     - Make sure your `requests` are actually sufficient to minimally run your application in case the pod gets scheduled to a busy worker.
+* Many applications need less CPU/memory to minimally operate than you'd think.
+     - Visualize Kubernetes' CPU limitations as more similar to timesharing than slicing performance. It's not that `250m` only gets you 500 MHz of a 2 GHz CPU; it's more like getting that 2 GHz CPU core for about 250ms total during a given 1000ms window.
+          + To be clear, the way k8s shares CPUs is not so simple as that, but it helps to understand what you're getting when you ask for `250m` CPU.
+     - A good starting point is `250m` CPU and `256M` memory.
+          + You'll adjust this based on various factors--for example, some application runtimes (Java) consume a large chunk of that memory, so you'd request more to accommodate.
+
+**Limits**:
+
+* The `limits` you specify should be as low as possible without constraining the container's ability to function normally.
+     - Kubernetes encourages designs that scale horizontally rather than vertically.
+     - In other words, don't plan for worst-case scenario load. Plan for what the container needs to perform its function normally, and then plan to scale horizontally so that more work can be performed.
+     - Don't "waste" headroom assuming that the container 
+* Your container probably doesn't need to set a limit higher than `2000m` CPU and/or `2G` memory.
+     - If you expect that the container may need to access more resources than this, it's very risky to set a high limit. The application could hold the resources even if you only intended to make headroom available for burst load.
+     - Many managed application runtimes, for example, will only release memory quickly when the system is under pressure.
+     - If your container is regularly going to need large amounts of memory or CPU, but needs few or only one instance, the application may not be suited well to Kubernetes.
+          + If we had a very large cluster, there are could still be benefits to deploying to k8s. Given that at time of writing we're somewhat constrained on number of available nodes, it's not advisable to deploy "tall" applications there.
+
+# Storage
+
+Dealing with storage can be somewhat of a pain in Kubernetes. Especially in our on-prem "private cloud" there are several challenges to overcome.
+
+## Supported Volume Plugins
+
+We support these volume plugins. A good case will need to be made with Architecture and Ops as to why others would be necessary. Primarily this is because with a few exceptions, new infrastructure will be required to use other plugins.
+
+* Atlas CIFS CSI driver
+* `HostPath` (but see below for limitations)
+* VSphere Volume
+
+Though we don't have any examples today, if your app is running in a cloud Kubernetes, you can obviously use the storage plugins specific to that cloud (e.g. Azure Disk or GCE Disk). You won't have the CIFS driver or VSphere volumes in those environments.
+
+### HostPath Is for Testing Only
+
+No deployed application (whether it's to Dev or Prod) can rely on `HostPath` volumes. These are very leaky abstractions since the files end up living on whichever node the pod happens to get scheduled to, and if the volume's reclaim policy isn't `Delete`, will fill up the node's disk over time. They can be used for testing and POC development on your local machine, but otherwise have little use.
+
+### Additional CSI Drivers
+
+We should try to avoid installing additional CSI drivers (for example, to support S3 storage provisioned by Kubernetes). This is mainly to reduce our maintenance and dependency footprint. It helps keep our applications mobile.
+
+## Strongly Prefer Dynamic Provisioning
+
+Deployments that want explicitly-created `PersistentVolume` objects **will, by default, be rejected** during review. You should strongly prefer dynamically provisioning storage using a `PersistentVolumeClaim` over manually creating PVs. Aside from the additional admin time required to manually create and maintain PVs, there is a non-trivial amount of risk associated with them. It is entirely possible for a PV to be created which deletes the backing storage when the app is redeployed, or mounts it incorrectly and locks out other services, or several other potential pitfalls that could result in serious production damage. Meanwhile, dynamically-provisioned storage can usually be configured _once_, at the Storage Class level, to behave correctly.
+
+Another good reason to avoid explicitly-created PVs is our cluster security model. Developers have namespace-level access, which means they've got (mostly) full control over everything within an application's namespace. PVs are cluster-level objects, however, so devs will not have access to create them. Because of this, getting a PV created would reduce velocity, as DevOps or a Team Lead would need to be engaged. PVCs, on the other hand, can be created by devs, as they're namespace-level objects. So, dynamically provisioned storage is the way to go to reduce admin surface and increase velocity. (It also lines up better with our goal of keeping an application's dependencies within a single dedicated namespace.)
+
+If you believe your deployment needs an explicitly-created, discrete PV, you must gain an explicit and documented exception from DevOps or a Team Lead. The spec will be very carefully reviewed to help make sure it doesn't fall into any of those dangerous scenarios.
+
+## Avoid ReadWriteMany and ReadOnlyMany Volumes
+
+The problem with `ReadWriteMany`/`ReadOnlyMany` volumes is that a [very large number of volume plugins do not support them](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes). Designing your application such that it requires those access modes will have a significant impact on the design, and will essentially lock you in to one of a few supported plugins (most of which we _do not support_ in our on-prem environment).
+
+If you find yourself really needing a `ReadWriteMany` volume, you may have a design constraint or issue which can be corrected. Most of the time, the same problem can be solved another way.
+
+## Accessing Shared (CIFS/SMB) Drives
+
+The #1 guideline for accessing shared storage via CIFS/SMB is _don't_. If it can be avoided, don't take direct dependencies on file structures highly unique to our environment or highly specific to another application. It limits your app's mobility, causes cross-cutting concerns, and brings issues and risk from other domains into yours. 
+
+To be clear, using the Atlas CIFS driver to provision app-exclusive storage on a CIFS drive is fine on its own. Kubernetes provides enough of an abstraction that the underlying storage could be moved or swapped without issue (usually). The problems start pouring in when you need to interoperate with existing file and path structures--i.e. take dependencies on assumptions your app cannot control.
+
+However, if you must interop with those existing structures (for example, due to a need to interact with ETL Framework or raw ETL data), do your best to abstract the data access away from your application's main logic. The point of this is to ensure that when those assumptions change, you're not hunting for literal paths cluttered throughout your code. Or, worse, trying to rewrite all of the places you were manually splicing paths together based on file structures that have now changed. In other words, make sure that all your file access assumptions pass through a single location so that the impact surface can be minimized when they change.
+
+# Designing Containers
+
+## Avoid Running as root
+
+By default, applications/commands within a Docker container run as `root`. This is unacceptable (with a few exceptions listed below). Just as with any application, yours should run with a smallest necessary set of privileges and permissions. In the future, our Kubernetes clusters will not permit containers to run as root.
+
+Here's an example Dockerfile showing how to run your app as a normal user:
+
+
+wzxhzdk:1
+
+
+In some rare cases, your app will be forced to run as `root`. These exceptions are as follows:
+
+* When it mounts CIFS storage through Kubernetes using our CSI driver
+
+--></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

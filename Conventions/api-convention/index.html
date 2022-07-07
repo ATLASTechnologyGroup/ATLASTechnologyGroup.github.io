@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>API Design Conventions - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li class="active">
+    <a href="./">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Misc/configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../..">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../coding-convention/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#api-design-conventions">API Design Conventions</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="api-design-conventions">API Design Conventions</h1>
+<p><a href="https://stackoverflow.com/c/atlastechnology/articles/55">https://stackoverflow.com/c/atlastechnology/articles/55</a></p>
+<!--
+
+## Overview
+
+We should implement RESTful WebAPI endpoints for front-end services to consume, rather than MVC applications that 
+are tightly coupled to server-side code. This allows for the possibility of multiple applications that can consume
+these endpoints, or even allow direct access to the API-enabled resources by our customers.
+
+These endpoints should generally return HTTP Status codes and JSON formatted data. Other data types may be supported
+through the `accept-header`.
+
+Example URLs:
+* `https://application.atlasdsr.com/api/resources`
+* `https://application.atlasdsr.com/api/resources/identifier`
+* `https://application.atlasdsr.com/api/resources/identifier/sub-resources?queryParameter=value`
+
+### Parts of an API URL
+
+#### Root `https://application.atlasdsr.com`
+
+This portion of the URL is largely outside the scope of this document.
+
+#### API Designator `/api`
+
+This is the API entry point. We will place our WebAPI endpoints under this route to help make APIs easier to find 
+as well as to avoid cluttering or collisions with any other resources that may use the same root.
+
+#### Resource `/resources`
+
+This route should typically be a plural noun and return a collection of items (i.e. databases, reports). This endpoint
+may also accept query parameters to filter, sort or page the results returned. This endpoint may return a limited subset
+of information, while more complete information is available for a specific instance.
+
+#### Identifier `/identifier`
+
+This route will return a specific instance of a resource. The instance returned may contain more information than 
+is available in the collection. It should provide details of any child resources.
+
+#### Sub-Resource `/sub-resources`
+
+This returns a child item or collection of items that belong to specific instance of a resource. The information
+returned should allow a consumer to retrieve more information (if available) from a specific resource endpoint (ie 
+`https://root/api/sub-resource/identifier`).
+
+#### Query Parameters `queryParameter=value`
+
+Query Parameters are separated from the URL with the `?` character, and from each other with the `&` character.
+They are generally used to filter returned data, sort it or otherwise select only a subset of information. They
+may also be used to request different formats or languages for the returned data. Query parameters should **not**
+be used for any information required to fulfill the request.
+
+## Design Considerations
+
+### Resources
+
+Resources should generally represent business objects. They may be constructed from data collated from other sources.
+The main endpoint for resources should generally be a plural noun and a GET request to that route should return a 
+collection of instances of the resource. By including an identifier as part of the route, details for a specific instance
+of a resource can be requested.
+
+
+#### Identifiers
+Identifiers are used to distinguish individual instances of resources, therefore they are unique to a specific instance
+of a resourece. When assigning identifiers for resources, care should be taken not to expose any underlying implementation
+details whenever possible, especially for publicly accessible APIs. For example, using integer identifiers that are the 
+Primary Key of the underlying database object can expose total numbers of particular resources, for example a Customer 
+identifier of 5123 would imply that approximately 5000 other customers exist or have existed. Instead use alternative 
+identifiers like [Hash Ids](https://hashids.org/) or if identifier length is not an issue, GUIDs are another option.
+
+If query performance is a concern, you can use these to generate internal identifiers:
+
+
+wzxhzdk:0
+
+
+#### HTTP Methods
+
+* GET: Request a collection of resources or a specific instance.
+* PUT: Create a specific instance of a resource. Should be directed to a route containing an identifier. The resource to
+be created should be in the body of the request.
+* PATCH: Update a specific instance of a resource. Should be directed to a route containing an identifier. The body should
+contain a patch object which is a specially formatted object with instructions for updating the resource.
+* DELETE: Remove a specific instance of a resource. Should be directed to a route containing an identifier.
+* POST: Submit something to the server. Can be used to create a resource or perform an action on the server. When used to
+create a resource instance, requests should target the route without an identifier.
+
+## API Documentation
+
+APIs must be documented in order to be useful. Generally we should use OpenAPI Specification 3. There are numerous tools
+to assist with documentation, such as SwaggerHub. For C# projects, documentation can be automated with Swashbuckle.
+
+For OpenAPI 3, specifications are expected to have more metadata and richness than just defining the raw API surface. The spec is expected to include:
+
+* `info` objects that meaningfully describe the spec and its purpose
+* Filled-out description fields on endpoints, schema, parameters, etc. so that documentation generated from the spec is immediately useful
+* Tags to provide actionable metadata about endpoints
+    - Swagger, for example, uses tags to group endpoints for display
+* Working, practical examples of the usage pattern for most endpoints or schema objects
+
+Organization of these documentation files depends on the spec format and scope/complexity of the API. Generally, for OpenAPI 3, follow these guidelines:
+
+* For trivial APIs with low complexity, use a single spec file (usually called OpenAPI.yaml).
+* For non-trivial APIs or APIs with more than a few endpoints, organize the files into groupings that make sense. Often, this will be around resources and aligns with your tags.
+    - OpenAPI specs can reference other spec files; repeat as little as possible.
+* Within your repo, place the spec files in their own folder in the highest hierarchical level that makes sense (preferring the root).
+
+## Summary
+
+### General Guidelines
+* Prefer nouns over verbs for endpoints
+* Use kebab-case ie: `https://root/api/complex-name-resource`
+* Obfuscate implementation details on public APIs (like IDs)
+* Avoid deep-nesting of resources
+    * Do this: `https://root/api/resources/identifier/sub-sub-resources`
+    * Not this: `https://root/api/resources/identifier/sub-resources/sub-id/sub-sub-resources`
+* Instead, return links to other resources (Hypermedia)
+* Return HTTP Status Codes instead of custom strings or enumerations
+* Return JSON formatted data by default
+    * JSON objects can be added to without breaking existing consumers
+* Extend APIs instead of altering them when possible
+    * If a version number must be included in the API URL (e.g. `/api/v1/...`), it should be as a door left open for unpredictable future scenarios, not as a primary vector of API change
+
+### Terminology
+
+* **Hypermedia** - In the context of an API, this refers to the concept of embedding links to other data within the
+returned data. For example, if one endpoint returns a specific Customer that has a child collection of Users, then 
+the return should also embed links for the child users. There are multiple competing formats for this data.
+    * HAL
+    * HATEOAS
+    * JSON-LD
+
+### Resources
+
+#### Best Practices
+
+* [StackOverflow Answer](https://stackoverflow.com/a/31261026/4429638)
+* [REST API Best Tutorial](https://restfulapi.net/)
+
+#### References
+
+* [HTTP Status Codes](https://www.restapitutorial.com/httpstatuscodes.html)
+* [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+
+#### Documentation
+* [Open API Specification 3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md)
+* [SwaggerHub](https://swagger.io/tools/swaggerhub/)
+* [Swashbuckle](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+
+--></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

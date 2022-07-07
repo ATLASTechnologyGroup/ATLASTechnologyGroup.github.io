@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Python Coding Conventions - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Misc/configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../naming-convention/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../../Misc/configure-workstation-aks/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#python-coding-conventions">Python Coding Conventions</a></li>
+            <li><a href="#project-conventions">Project Conventions</a></li>
+            <li><a href="#naming-and-style-conventions">Naming and Style Conventions</a></li>
+            <li><a href="#classes-vs-modules-vs-packages">Classes vs. Modules vs. Packages</a></li>
+            <li><a href="#dependency-injection">Dependency Injection</a></li>
+            <li><a href="#environment-and-setup">Environment and Setup</a></li>
+            <li><a href="#cross-platform">Cross Platform</a></li>
+            <li><a href="#type-annotations">Type Annotations</a></li>
+            <li><a href="#docstrings">Docstrings</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="python-coding-conventions">Python Coding Conventions</h1>
+<p>Generally speaking, follow <a href="https://en.wiktionary.org/wiki/Pythonic">Pythonic</a> coding styles and guidelines. </p>
+<p>This document is designed to point you in the right direction and propose a few approaches to coding to maintain consistency.</p>
+<h2 id="project-conventions">Project Conventions</h2>
+<p>Projects must be designed and organized in a specific way to ensure they are both docker compatible and they will continue to function going forward. <a href="https://www.python.org/dev/peps/pep-0518/">PEP-518</a> lays out a new project format to describe project dependencies. In addition <a href="https://www.python.org/dev/peps/pep-0517/#build-requirements">PEP-517</a> describes a very-likely to pass way to handle and build project dependencies.</p>
+<p>As part of adapting to the changing landscape we are changing from the <code>pipenv</code> tool to <code>poetry</code>. Pipenv no longer fits in the broader vision of how Python dependencies are managed and never provided much of a deployment vision, either.</p>
+<p><code>Poetry</code>, on the other hand, maintains a somewhat opinioned vision of how to build and deploy Python applications and libraries both that is consistent with the future of Python (already integrates the <code>pyproject.toml</code>) as well as intends to provide standardized hooks for build and deployment.</p>
+<ul>
+<li>Projects must be small and single-purposed.</li>
+<li>Projects should always be hosted in a git repository.</li>
+<li>All projects should follow the below structure replacing app with the name of the package:</li>
+</ul>
+<pre><code>.
+├── app
+│   ├── subpackage
+│   │   ├── __init__.py
+│   │   └── somefile.py
+│   ├── main.py
+│   └── __init__.py
+└── pyproject.toml
+</code></pre>
+
+<p>Note that the pyproject sits one level above the actual code. This is very similar to, like, C/C++ projects or Go projects where you&rsquo;d typically have your project file sitting above the source files. Ideally this should be a more familiar and considerably easier to build format.</p>
+<ul>
+<li>Any Web API service should be exposed through <code>FastAPI</code></li>
+<li>All developers should use <code>poetry</code> for environment creation and management.</li>
+<li>All docker images should build from the <code>python-poetry</code> or <code>python-poetry-fastapi</code> images in Harbor</li>
+<li>Packages should be deployed and pulled using the Azure Devops artifacts repository</li>
+<li>Sensitive data like passwords and users should be read out of configuration (secrets, files, environment variables) and not be checked in to source control.</li>
+</ul>
+<h2 id="naming-and-style-conventions">Naming and Style Conventions</h2>
+<ul>
+<li>Follow the style guidelines as provided in <a href="https://www.python.org/dev/peps/pep-0008/#naming-conventions">PEP8</a>.</li>
+<li>For purposes of convention, prefer single quotes to double quotes in anything beyond multi-line strings.</li>
+<li>Any time in a project that doesn&rsquo;t follow convention then follow the general conventions of that project (e.g. Overlord).</li>
+</ul>
+<h2 id="classes-vs-modules-vs-packages">Classes vs. Modules vs. Packages</h2>
+<ul>
+<li>A single file should not contain more than 1 public class</li>
+<li>Use classes to represent encapsulation of both behavior and state.</li>
+<li>Use classes as a mixin object to inject functionality in to another class.</li>
+<li>Use a single <a href="https://docs.python.org/3/tutorial/modules.html#modules">Module</a> when you have a single piece of behavior.</li>
+<li>Use a <a href="https://docs.python.org/3/tutorial/modules.html#packages">Package</a> to combine modules or packages based on domain.</li>
+<li>Avoid name-pollution by always having all python in a top-level <a href="https://docs.python.org/3/tutorial/modules.html#packages">Package</a>.</li>
+<li><a href="https://docs.python.org/3.1/howto/functional.html#generator-expressions-and-list-comprehensions">Favor generators, list comprehensions, and iterators over classes if it is clean to do so</a>.</li>
+<li>Prefer readability and usability over dogmatic adherance to rules.</li>
+</ul>
+<h2 id="dependency-injection">Dependency Injection</h2>
+<ul>
+<li>For classes, favor mixins for dependency injection. <a href="https://www.youtube.com/watch?v=EiOglTERPEo]">See here for a discussion on the topic</a>.</li>
+<li>For functions, pass functions as parameters (service injection).</li>
+</ul>
+<h2 id="environment-and-setup">Environment and Setup</h2>
+<ul>
+<li>All packages should maintain compatibility with <a href="https://pip.pypa.io/en/stable/reference/pip/">pip</a></li>
+<li>All python projects must be self-contained and may only rely on <code>pip</code> and <code>python</code> to run.</li>
+<li>A library should be just installable through <code>poetry install {package}</code></li>
+<li>A non-docker runnable app should have a self-contained script that sets up the environment</li>
+<li>A docker app will not require anything special as long as it uses <code>python-poetry</code> or something based on <code>python-poetry</code></li>
+</ul>
+<h2 id="cross-platform">Cross Platform</h2>
+<ul>
+<li>Assume python projects will be installed cross-platform.</li>
+<li>Always use <code>os</code> module functions to do things like path construction and file manipulation.</li>
+</ul>
+<h2 id="type-annotations">Type Annotations</h2>
+<ul>
+<li>Functions and methods should be annotated as much as possible</li>
+</ul>
+<h2 id="docstrings">Docstrings</h2>
+<ul>
+<li>Docstrings are required for any code being exposed to anyone outside Atlas.</li>
+<li>Docstrings should be used for complex integrations with external tools.</li>
+<li>Docstrings are a nice to have for any internal code.</li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

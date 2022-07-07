@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Product Lifecycle Requirements - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Conventions/api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/naming-convention/">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../../Conventions/python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Misc/configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../database-and-schema-design-guidelines/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../project-technical-guidelines/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#product-lifecycle-requirements">Product Lifecycle Requirements</a></li>
+            <li><a href="#table-of-contents">Table of Contents</a></li>
+            <li><a href="#lifecycle-sdlc">Lifecycle != SDLC</a></li>
+            <li><a href="#what-is-a-product">What is a Product?</a></li>
+            <li><a href="#the-structure-of-this-document">The Structure of this Document</a></li>
+            <li><a href="#reading-the-requirements">Reading the Requirements</a></li>
+        <li class="main "><a href="#versioning-and-operation-lifecycle">Versioning and Operation Lifecycle</a></li>
+            <li><a href="#public-version-vs-internal-version">Public Version vs. Internal Version</a></li>
+            <li><a href="#choosing-versioned-or-rolling">Choosing Versioned or Rolling</a></li>
+            <li><a href="#versioned-products">Versioned Products</a></li>
+            <li><a href="#rolling-products">Rolling Products</a></li>
+        <li class="main "><a href="#responsibility-accountability-and-ownership">Responsibility, Accountability, and Ownership</a></li>
+            <li><a href="#maintenance-and-support-checklist">Maintenance and Support Checklist</a></li>
+            <li><a href="#the-importance-of-documentation">The Importance of Documentation</a></li>
+        <li class="main "><a href="#product-growth">Product Growth</a></li>
+            <li><a href="#the-importance-of-innovation">The Importance of Innovation</a></li>
+            <li><a href="#the-importance-of-evolution">The Importance of Evolution</a></li>
+        <li class="main "><a href="#summary">Summary</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="product-lifecycle-requirements">Product Lifecycle Requirements</h1>
+<p>As projects begin, develop, and mature, they eventually blossom into full-fledged products. Along the way, there are several important steps to take that help ensure the product turns out solid. Too frequently ignored, however, is the follow-through once the product has matured. Continuing to manage the lifecycle of a product, even once it&rsquo;s &ldquo;done&rdquo;, is just as important to its quality, and often the quality-of-life of your team as well.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p>Looking for the <strong>TL;DR</strong>? Here are some shortcuts to common reference sections: </p>
+<ul>
+<li><a href="#versioning-and-operation-lifecycle">Product Versioning Requirements</a></li>
+<li><a href="#maintenance-and-support-checklist">Support and Maintenance Checklist</a></li>
+<li><a href="#the-importance-of-documentation">Documentation Requirements</a></li>
+<li><a href="#evolution-requirements">Product Evolution Requirements</a></li>
+</ul>
+<p>Full Table of Contents:</p>
+<!-- This is a tag used by the docsite generator (mkdocs) to automatically generate a TOC.
+     Obviously it doesn't do anything in other markdown renderers. -->
+
+<div class="toc">
+<ul>
+<li><a href="#product-lifecycle-requirements">Product Lifecycle Requirements</a><ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#lifecycle-sdlc">Lifecycle != SDLC</a></li>
+<li><a href="#what-is-a-product">What is a Product?</a></li>
+<li><a href="#the-structure-of-this-document">The Structure of this Document</a></li>
+<li><a href="#reading-the-requirements">Reading the Requirements</a></li>
+</ul>
+</li>
+<li><a href="#versioning-and-operation-lifecycle">Versioning and Operation Lifecycle</a><ul>
+<li><a href="#public-version-vs-internal-version">Public Version vs. Internal Version</a></li>
+<li><a href="#choosing-versioned-or-rolling">Choosing Versioned or Rolling</a></li>
+<li><a href="#versioned-products">Versioned Products</a><ul>
+<li><a href="#during-design">During Design</a></li>
+<li><a href="#during-initial-development">During Initial Development</a></li>
+<li><a href="#upon-initial-release">Upon Initial Release</a></li>
+<li><a href="#subsequent-versions">Subsequent Versions</a></li>
+<li><a href="#discontinuing-a-product">Discontinuing a Product</a></li>
+</ul>
+</li>
+<li><a href="#rolling-products">Rolling Products</a><ul>
+<li><a href="#during-design_1">During Design</a></li>
+<li><a href="#during-initial-development_1">During Initial Development</a></li>
+<li><a href="#upon-initial-release_1">Upon Initial Release</a></li>
+<li><a href="#subsequent-versions_1">Subsequent Versions</a></li>
+<li><a href="#discontinuing-a-product_1">Discontinuing a Product</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#responsibility-accountability-and-ownership">Responsibility, Accountability, and Ownership</a><ul>
+<li><a href="#maintenance-and-support-checklist">Maintenance and Support Checklist</a></li>
+<li><a href="#the-importance-of-documentation">The Importance of Documentation</a></li>
+</ul>
+</li>
+<li><a href="#product-growth">Product Growth</a><ul>
+<li><a href="#the-importance-of-innovation">The Importance of Innovation</a></li>
+<li><a href="#the-importance-of-evolution">The Importance of Evolution</a><ul>
+<li><a href="#evolution-requirements">Evolution Requirements</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+<h2 id="lifecycle-sdlc">Lifecycle != SDLC</h2>
+<p>While this document deals with the lifecycle of products at ATLAS, it is not a replacement for an understanding of Systems/Software Development Lifecycle (SDLC) approaches. It also does not prescribe an approach. Instead, it addresses how the company in particular develops and maintains its products. These requirements should be applicable to any SDLC process.</p>
+<p>This distinction is made because SDLC is a loaded term. Sometimes it can refer generically to any lifecycle approach, but often it refers to <a href="https://en.wikipedia.org/wiki/Systems_development_life_cycle">a very particular process</a> that heavily promotes waterfall development. ATLAS is not a waterfall shop, and many aspects of the colloquial SDLC methodology don&rsquo;t fit well. As a result, the term &ldquo;SDLC&rdquo; will be avoided from here.</p>
+<h2 id="what-is-a-product">What is a Product?</h2>
+<p>It&rsquo;s easy to look at the front-end applications, which receive all the marketing and sales focus, and call those the products. From a business and sales perspective, that&rsquo;s probably true. Those are the products of the <em>company</em>. Engineering, however, has many more products than just those SKUs. </p>
+<p>This document uses the term <em>product</em> frequently and loosely, but what is a product? Within the context of these requirements, basically <em>everything</em> is a product. They apply to all efforts. While the &ldquo;productness&rdquo; of some sub-modules or parts of larger applications might be debatable, assume that these requirements apply when in doubt.</p>
+<h2 id="the-structure-of-this-document">The Structure of this Document</h2>
+<p>These requirements are broken into three major categories that encapsulate most of a product&rsquo;s lifecycle. The first section is about the <a href="#versioning-and-operation-lifecycle">operation of the product</a>, specifically around managing the initial effort, ongoing development, and its relationship with its users throughout. The second section details matters of <a href="#responsibility-accountability-and-ownership">responsibility, accountability, and ownership</a> of the product as it relates to the support and maintenance from both a business and technical level. Finally, the last section covers the <a href="#product-growth">growth, innovation, and upkeep</a> of products&ndash;how they&rsquo;re kept from stagnation and how technical debt is paid off.</p>
+<h2 id="reading-the-requirements">Reading the Requirements</h2>
+<p>When interpreting the verbiage of the requirements, know that it was inspired by <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>. As a quick reference, requirements using <strong>must</strong>, <strong>shall</strong>, <strong>must not</strong>, and <strong>shall not</strong> are absolute. <strong>Should</strong>, <strong>should not</strong>, <strong>recommended</strong>, and <strong>not recommended</strong> are strongly encouraged but there may exist valid reasons to avoid them. <strong>May</strong>, <strong>may not</strong>, and <strong>optional</strong> are optional, but acknowledged as part of the problem space.</p>
+<p>In all cases, the letter of the item is less important than the spirit. Reach out to team leadership if there are questions around interpretation. Similarly, no matter how absolute the requirement in this document, nothing overrides the fact that business must continue to operate. These requirements are a tool to assist in cooperation and ongoing value-creation for our customers; they <em>are not</em> a book with which to beat others.</p>
+<h1 id="versioning-and-operation-lifecycle">Versioning and Operation Lifecycle</h1>
+<p>The versioning and operational requirements laid down in this document are bisected into the categories of <a href="#versioned-products">versioned products</a> and <a href="#rolling-products">rolling products</a>. Neither of them necessarily reflect anything about the development or release methodology of the product itself, though obviously some practices tend in one direction or the other. Instead, the focus is on the two different sets of expectations that consumers of the products harbor. The requirements are guided by these expectations, and differ as a result.</p>
+<p>ATLAS uses a <em>versioned</em> approach most often for technical modules like code libraries, containers, and (rarely) some APIs. These are strongly versioned to provide a contract to their consumers. The contract serves as an interface guarantee; a statement that the product at version <code>a.b.c</code> does exactly what it does the same way every time, while version <code>x.y.z</code> may behave differently.</p>
+<p>On the other hand, ATLAS usually relies on a <em>rolling</em> approach for its front-end, customer-facing software. Here, the contract between developer and consumer is much softer. It&rsquo;s implied that in exchange for a live, hassle-free stream of updates, users receive new versions automatically and regularly&ndash;usually without their explicit consent or action. These products still have versions, of course, but the version is not part of that developer/consumer contract. Instead, there is an understanding that the developers will do their due diligence to ensure smooth transitions between releases, since users cannot opt out.</p>
+<p>There are certainly crossovers between these domains. However, the important part is keeping in mind the consumer&rsquo;s expectations. One must design these into the product, as they will heavily affect its lifecycle.</p>
+<h2 id="public-version-vs-internal-version">Public Version vs. Internal Version</h2>
+<p>It&rsquo;s important to note that there is a clear distinction between the consumer-facing (&ldquo;public&rdquo;) version number of a product and its internal version as the development team knows it. No matter the approach, the internal version of a product <strong>must</strong> always uniquely represent a specific build of it&ndash;or, more accurately, a reproducible point-in-time instance of it. The public version of the product <em>may</em> be the same as the internal version, but rarely will. The requirements in this document almost exclusively cover public versions.</p>
+<p>The public version number of the product is representative of its feature set rather than any given point-in-time instance. Rolling products must not have a prominent public version number. As discussed in later sections, the public version number is tied to a particular release rather than a build instance, and always requires a developer&rsquo;s hand to maintain the contract implied by the version number. For example, if a product follows <a href="https://semver.org/">Semantic Versioning</a>, there is meaning behind each part of the version number that must be upheld. </p>
+<p>There&rsquo;s another version indicator that can exist as well: a marketing version number. Using Windows as an example, Windows 10 is not (internally or externally) version <code>10.x.y.z</code> of the OS software. The <code>10</code> is just part of the marketing. These indicators are of little concern to the development team, though there are a few considerations.</p>
+<h2 id="choosing-versioned-or-rolling">Choosing Versioned or Rolling</h2>
+<p>When starting a new project, choosing the operational lifecycle strategy is key to developing and maintaining it successfully. Making this decision can be challenging, but there are a few guidelines to help.</p>
+<p><strong>Versioned</strong>:</p>
+<ul>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Creates a stable interface for consumers to rely on</li>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Gives the dev team an easy path to introduce breaking changes when necessary</li>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Allows clear communication around support windows</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Tends to slow the pace of releases</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Tends to stagnate consumers<ul>
+<li>Consumers will not upgrade unless they are forced or convinced</li>
+<li>Forcing consumers to upgrade should come with a clear communication of deprecation to all consumers, a generous timeline for them to switch, and (for critical products) an out-of-band window to support those that cannot or will not upgrade.</li>
+<li>Convincing them requires publishing detailed change notes and, sometimes, marketing and promoting the new version (even internally)</li>
+</ul>
+</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Can be a burden on maintenance<ul>
+<li>Depending on the users of the product and your relationship with them, you may be forced to support many versions simultaneously</li>
+</ul>
+</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Disadvantageous for service-oriented products</li>
+</ul>
+<p>Some products are inherently versioned. Code libraries are a prime example. Organizations occasionally hybridize the two approaches&ndash;for example, automatically releasing nightly &ldquo;unstable&rdquo; versions or only making the latest version available&ndash;but the product is still consumed at a specific version. The consumer usually still has to seek out and upgrade versions themselves, and in those scenarios most consumers are encouraged to wait for full releases. Even versioned products with auto-updaters are still versioned.</p>
+<p><strong>Rolling</strong>:</p>
+<ul>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Allows for an uninterrupted flow of new features to consumers</li>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Smaller, non-breaking bug fixes can be applied as needed, enabling prompt resolution of issues</li>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Only a single &ldquo;live&rdquo; version to worry about</li>
+<li><span style="text-shadow: 0 0 0 green; color: transparent;">➕</span> Tends to accelerate the pace of releases</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Communication around support windows lacks clear points of delineation</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> A deft approach to change is required from developers<ul>
+<li>Since there is no ability to opt-in or opt-out of changes, any planned breaking change must be clearly communicated to all consumers<ul>
+<li>They must be given a generous timeline to adapt, sometimes requiring training</li>
+</ul>
+</li>
+<li>Every upgrade, enhancement, new feature, and regression goes live for <em>all consumers</em><ul>
+<li>This necessitates a more thorough testing methodology and more careful design&ndash;not necessarily bad things, but certainly time-sinks</li>
+<li>Leads to strategies such as blue/green deployments; these strategies add complexity and overhead</li>
+</ul>
+</li>
+<li>It often leads to strange workarounds to avoid introducing breaking changes alongside new functionality<ul>
+<li>These workarounds/hacks more easily become permanent, due to the lack of clear delineation around support windows, which can eventually (if unmanaged) create large amounts of technical debt</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Tends to increase burden on support teams/documentation<ul>
+<li>Consumers are likely to find themselves left behind if they step away from your product for a time</li>
+<li>Even consistently engaged users are more likely to miss new functionality without strong update communication</li>
+</ul>
+</li>
+<li><span style="text-shadow: 0 0 0 red; color: transparent;">➖</span> Cannot cleanly apply to some product types</li>
+</ul>
+<p>Most SaaS products (including web applications) use a rolling model. Even their APIs are rolling, though often they&rsquo;re hybridized. In the common hybrid model, the consumer declares a version in their request to specify the desired functionality and compatibility. However, they&rsquo;re still forced to use the current interface; the version request is a function of the software rather than a fundamental part of the contract. It&rsquo;s an inversion of control; the user must ask to be allowed to tap into compatibility with old versions, rather than the user driving which version is used and the developer trying to shepherd them forward.</p>
+<h2 id="versioned-products">Versioned Products</h2>
+<h3 id="during-design">During Design</h3>
+<ul>
+<li>The intended consumer audience for the product must be set.<ul>
+<li>Remember: a consumer might be a customer user, an internal user, or even another development group. <strong>No matter who the audience is, treat them as your consumer.</strong></li>
+</ul>
+</li>
+<li>Consumer expectations for lifecycle must be defined.<ul>
+<li>If you&rsquo;re here, you&rsquo;ve probably already done this.</li>
+</ul>
+</li>
+<li>The release mechanism must be established.<ul>
+<li>How will consumers get new versions?</li>
+</ul>
+</li>
+<li>SLAs around support must be quantified.<ul>
+<li>What expectations should be set around how long a given version will be supported?</li>
+<li>What is the plan for enterprise-level support of out-of-band versions (if applicable)?</li>
+</ul>
+</li>
+<li>Versioning rules for the product must be declared.<ul>
+<li>Either they are defined in the design, or a reference is provided to the standard scheme used.</li>
+<li><strong>One should strongly prefer <a href="https://semver.org/">Semantic Versioning</a> over other schemes.</strong></li>
+<li>No matter the versioning scheme chosen, it <strong>must meet these criteria</strong>:<ul>
+<li>Some indicator of major version and minor version must be available at a minimum.<ul>
+<li>Further indicators, such as patch numbers and tags to indicate development status (e.g. <code>3.0.4-beta</code>), are allowed.</li>
+<li>Additional indicators (patch numbers, etc.) must have their meaning and rules clearly defined in the design, especially as they relate to the major and minor version.</li>
+</ul>
+</li>
+<li>Incrementing the minor version must never introduce known breaking changes.</li>
+<li>Incrementing the major version should reset the minor version.<ul>
+<li>In other words, the minor version should always be a subset of the major version.</li>
+</ul>
+</li>
+<li>The version indicators must always be mathematically comparable first and lexically comparable second. The comparison must linearly indicate the release history of the product relative to other versions.    <ul>
+<li>This is to address a common error. Version <code>3.10</code> must always be a later version than <code>3.2</code> when comparing version numbers&ndash;specifically, 8 minor versions later.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="during-initial-development">During Initial Development</h3>
+<ul>
+<li><a href="#responsibility-accountability-and-ownership">The parties responsible and accountable for the product&rsquo;s ongoing maintenance, development, and support must be established.</a></li>
+<li>Consumer-facing versioning is not important during initial development until the product is made available to consumers for the first time.</li>
+<li>Expectations should be set that the &ldquo;interface contract&rdquo; does not begin until the product&rsquo;s initial full release.<ul>
+<li>To clarify, in-development versions are likely to have breaking changes constantly.</li>
+<li>However, the responsibility is on the developers to ensure that whatever version consumers are likely to take dependencies on <em><strong>is</strong> the initial full release</em>.</li>
+<li>In other words, don&rsquo;t hand consumers a mostly-functional version of the product and expect them to not start relying on it, no matter what the version number is. <strong>It&rsquo;s on you, the developer, to manage expectations.</strong></li>
+</ul>
+</li>
+<li>Internal versioning begins ASAP during initial development.<ul>
+<li>The internal version indicator should not be prominently visible publicly.</li>
+<li>It must always be possible for maintainers/supporters to discover the internal version of the product in the wild (e.g. once deployed or installed somewhere).</li>
+<li>It is strongly encouraged to use a different versioning scheme for internal versions. Prefer ones that include a temporal element.</li>
+</ul>
+</li>
+</ul>
+<h3 id="upon-initial-release">Upon Initial Release</h3>
+<ul>
+<li>The initial release shall be version 1.0 (or equivalent in your scheme).</li>
+<li>The full interface contract is now in effect.</li>
+<li>Version indicators must now fully adhere to the versioning rules laid out in the design, including the initial release.</li>
+</ul>
+<h3 id="subsequent-versions">Subsequent Versions</h3>
+<ul>
+<li>Changes in ownership of the ongoing <a href="#responsibility-accountability-and-ownership">support and maintenance</a> must be continually well documented, and that ownership must always be clearly defined.</li>
+<li>Release versions shall be a concern of the release pipeline/process, and shall always reflect the consumer-facing (&ldquo;public&rdquo;) version indicator.<ul>
+<li><strong>No system</strong> shall automatically increment the major version of a product.</li>
+<li><strong>Build systems</strong> shall not increment the major or minor version of a product. Only release processes can affect them.</li>
+<li>These requirements are in place to convey the meaning behind the version. No automated system is capable of determining what the versioning of the next iteration of the product should be. However, it is acceptable for a <em>release system</em> to, by default, increment a minor version.</li>
+</ul>
+</li>
+<li>It should not be possible for a release to be created that generates an out-of-sequence, historically inaccurate, or repeat version number.</li>
+<li>All major and minor releases shall be communicated to consumers via appropriate means.</li>
+<li>New releases shall include change notes.<ul>
+<li>These can be as simple as a summary of the whole update (&ldquo;fixed bugs with loading report options&rdquo;), or as complex as a full changelog.</li>
+<li>The format of these notes depends on the intended consumer of the product, but should tend toward being as informative as possible.</li>
+</ul>
+</li>
+<li>Changing the versioning scheme for a product must occur only at new major versions. It is considered a breaking change.</li>
+<li>Major version releases should only be made when breaking changes are introduced.</li>
+<li>The development team shall support the entire current (latest) major version series.<ul>
+<li>Example: if Product X is at version <code>3.4.1</code> and a consumer using version <code>3.1.8</code> finds a bug, this is a valid issue and must be supported.</li>
+<li>Note that &ldquo;support&rdquo; <em>does not</em> mean that a special version <code>3.1.8-fix</code> should be created. If the issue is already fixed in a later release, it is valid to ask the consumer to upgrade. If the issue still exists in the most recent release, it is valid to fix it in a future release.</li>
+</ul>
+</li>
+<li>The development team shall not make the immediately previous major version series of the product unavailable.<ul>
+<li>Example: Product X is at version <code>3.4.1</code>. The team then releases version <code>4.0.0</code>. It <strong>cannot</strong> make the <code>3.*.*</code> series of the product unavailable. It could take the <code>2.*.*</code> series offline if necessary.</li>
+<li>This requirement is in place to provide some level of security to consumers&rsquo; downstream dependent systems (e.g. build pipelines).</li>
+<li>Although the <code>3.*.*</code> series is still available in this example, availability does not necessarily imply support (see below).</li>
+<li>Versions prior to the initial release do not apply.</li>
+<li>There is one exception: when the software has ceased to function properly in uncorrectable ways outside of the dev team&rsquo;s control, it may be made unavailable.</li>
+</ul>
+</li>
+<li>The development team shall support the most recent version of the immediately previous major version series of the product.<ul>
+<li>For example, if the product is version <code>3.4</code> and then <code>4.0</code> is released, version <code>3.4</code> must continue to be supported. Version <code>3.3</code> may go unsupported. When version <code>5.0</code> releases, support may end for <code>3.4</code>.</li>
+<li>As deemed necessary by product leadership, this support can be sunset. Sunsetting the previous series is a double-edged sword:<ul>
+<li>Setting a sunset date <strong>requires</strong> that support for the series continue through that date. <ul>
+<li>This supersedes the requirement to only support the current and immediately previous series, so the team may end up supporting many series.</li>
+</ul>
+</li>
+<li>A generous window must be given before end-of-life.</li>
+<li>Consumers must be notified of the sunset date using appropriate means.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The product team may choose to support more versions than the minimum outlined here. If so, the policy must be documented alongside the versioning scheme.</li>
+<li>Fixes <em>should almost always</em> be made against the latest series. Additions <em>shall always</em> be made against the latest series. <ul>
+<li>It is strongly discouraged to branch the product into two actively maintained series (like how Python 2 and Python 3 worked until 2020). </li>
+<li>However, in some rare and unusual cases, the product&rsquo;s leadership may choose to do this.</li>
+</ul>
+</li>
+</ul>
+<h3 id="discontinuing-a-product">Discontinuing a Product</h3>
+<p>There is currently no set of requirements or guidelines for discontinuing a product. A process will need to be established before requirements can be created.</p>
+<h2 id="rolling-products">Rolling Products</h2>
+<p>These are often called &ldquo;live&rdquo; or &ldquo;service&rdquo; products, and they represent a vast majority of the software consumers use today.</p>
+<h3 id="during-design_1">During Design</h3>
+<ul>
+<li>The intended consumer audience for the product must be set.<ul>
+<li>Remember: a consumer might be a customer user, an internal user, or even another development group. <strong>No matter who the audience is, treat them as your consumer.</strong></li>
+</ul>
+</li>
+<li>Consumer expectations for lifecycle must be defined.<ul>
+<li>If you&rsquo;re here, you&rsquo;ve probably already done this.</li>
+</ul>
+</li>
+<li>The release mechanism must be established.<ul>
+<li>How will consumers receive the live version?</li>
+</ul>
+</li>
+<li>Any expectations or agreements around product features or interface details (especially relating to consumer design input, demands, legal agreements, or otherwise) must be well-documented so that future maintainers are aware.</li>
+<li>It should be decided what SLAs are needed around feature support and product/service availability.<ul>
+<li>Since the consumers are not able to opt out of updating, features they may rely on must be protected by some kind of SLA, even if its only for internal accountability and confidence.</li>
+<li>Many rolling products are SaaS offerings; this implies that the product is only usable when the service is available and functioning as intended. Because of this, the product&rsquo;s availability must be protected by some kind of SLA, even if its only for internal reference and confidence.</li>
+</ul>
+</li>
+</ul>
+<h3 id="during-initial-development_1">During Initial Development</h3>
+<ul>
+<li><a href="#responsibility-accountability-and-ownership">The parties responsible and accountable for the product&rsquo;s ongoing maintenance and support must be established.</a></li>
+<li>A strategy for smoothly transitioning into breaking changes must be developed.<ul>
+<li>Despite the rolling nature of the product, <em>it is not valid</em> to break functionality without ensuring minimal consumer disruption.</li>
+<li>This strategy includes:        <ul>
+<li>Software design accommodations for changing requirements (so that a transition plan can exist later)</li>
+<li>Communication plans<ul>
+<li>How are consumers to learn of changes to the product? </li>
+<li>What are the impacts? </li>
+<li>What is the value for them?</li>
+<li>When is the change expected?</li>
+</ul>
+</li>
+<li>An approach to gate delivery of features or changes, such as feature flags or blue/green deployments</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The dev team must have a plan for determining consumer acceptance (e.g. UAT).<ul>
+<li>This is true for versioned products as well, but becomes especially important for rolling products in subsequent releases.    </li>
+</ul>
+</li>
+<li>A rolling product, when it must take dependencies, should prefer to take dependencies on versioned products.<ul>
+<li>Versioned products provide a level of reliability that rolling products cannot. Depending on them allows your live rolling product to better isolate issues and remove variables during troubleshooting.</li>
+</ul>
+</li>
+<li>Internal versioning begins ASAP during initial development.<ul>
+<li>The internal version indicator should not be prominently visible publicly.</li>
+<li>It must always be possible for maintainers/supporters to discover the internal version of the live product.</li>
+<li>Rolling products are strongly encouraged to either include a temporal element in their internal version, or be able to easily track backwards into one.<ul>
+<li>This is important to help establish a historical reference of versions that otherwise may not exist if, for example, the internal version is based entirely on an arbitrary incrementing ID.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="upon-initial-release_1">Upon Initial Release</h3>
+<ul>
+<li>The product shall not be referenced by a version indicator when communicating with consumers, with the exception of any marketing version applied to it.<ul>
+<li>This includes technical consumers and internal (developer) consumers.</li>
+<li>This requirement exists to prevent internal versioning from becoming external versioning. Versioning a rolling product is a violation of its implicit contract with consumers and sets the wrong expectations with them.</li>
+<li>Changes, fixes, and feature additions can instead be referenced by release timeline or development milestone, depending on product leadership&rsquo;s preference.</li>
+</ul>
+</li>
+</ul>
+<h3 id="subsequent-versions_1">Subsequent Versions</h3>
+<ul>
+<li>The development team must not introduce breaking changes without generous warning to consumers.</li>
+<li>For breaking changes, a transition plan must be developed to ensure as seamless an experience as possible.<ul>
+<li>It should follow the strategy designed during initial development.</li>
+</ul>
+</li>
+<li>Changes in ownership of the ongoing <a href="#responsibility-accountability-and-ownership">support and maintenance</a> must be continually well documented, and that ownership must always be clearly defined.</li>
+<li>Changes to the consumers&rsquo; expectations of the product, agreements (legal or otherwise), and design input over time must be continually well documented.</li>
+<li>New releases containing new features, important fixes, or impactful changes shall coincide with change communication to the consumer.<ul>
+<li>This can be as simple as a summary of the whole update (&ldquo;fixed bugs with loading report options&rdquo;), or as complex as a full changelog.</li>
+<li>The format of these notes depends on the intended consumer of the product, but should tend toward being as informative as possible.</li>
+</ul>
+</li>
+<li>The team should continue to support deprecated features for a generous period of time.<ul>
+<li>The window should be large enough that even consumers using the product in unintended ways, who act on elongated timelines, and who require some coercion are able to adapt before the feature goes away.</li>
+<li>Security issues are an exception; features found to suffer from a security vulnerability can be removed immediately as a result. If the feature was slated for removal anyway, it can remain absent. If not, it should be reintroduced once the issue has been addressed. <ul>
+<li>One should still notify consumers when these changes are made.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The team should track metrics around feature utilization, especially around features that are currently or will soon become deprecated.<ul>
+<li>This data should be used to inform transition plans and better target enhancements.</li>
+</ul>
+</li>
+<li>The team must continue to prioritize consumer acceptance (UAT) for each new release, especially those with new features.</li>
+<li>A strategy must exist for correcting when breaking regressions are accidentally introduced.<ul>
+<li>Whatever the strategy, it <em>must</em> include a catch-all safety, such as a full rollback, that ensures the product becomes fully available in an accepted state again.</li>
+<li>This is because consumers do not have the ability to opt out of updates that happen to be non-functional; some guarantee of restoration of service is required.</li>
+</ul>
+</li>
+<li>The development team must not provide differently-versioned instances of the same product.<ul>
+<li>In other words, even if multiple instances of the product are live at a given time, all instances must be the same internal version.</li>
+<li>This only applies to production environments, of course.</li>
+<li>Exceptions to this can be made, but only by company leadership. Supporting multiple versions of a rolling product turns it into a versioned product (but without the positive attributes normally associated with them). Support and maintenance costs are an order of magnitude higher.</li>
+</ul>
+</li>
+</ul>
+<h3 id="discontinuing-a-product_1">Discontinuing a Product</h3>
+<p>There is currently no set of requirements or guidelines for discontinuing a product. A process will need to be established before requirements can be created.</p>
+<h1 id="responsibility-accountability-and-ownership">Responsibility, Accountability, and Ownership</h1>
+<p>A product&rsquo;s lifecycle is about more than versioning new features and managing consumer expectations. The product must also be continually supported and maintained. It is not acceptable to have products that are unattended. Having a clear and complete understanding of who owns a product&rsquo;s lifecycle and what that ownership entails is critical to its continued success.</p>
+<table>
+<thead>
+<tr>
+<th>Responsibility vs. Accountability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>It is important to differentiate between responsibility and accountability. The <em>responsible</em> party is the one tasked with the duty. The <em>accountable</em> party is the one held liable for the results. The two can be the same but aren&rsquo;t necessarily so.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="maintenance-and-support-checklist">Maintenance and Support Checklist</h2>
+<p>This section provides an easy checklist of maintenance and support questions that <strong>must</strong> be answered for every product. The answers to these questions must always be available in product documentation during all stages of its lifecycle. They help ensure everyone is aware of which team is responsible for the ongoing support and who is accountable for the product&rsquo;s continued success. The responsible and accountable party can shift over time, but it must always be clearly defined.</p>
+<p><strong>Note that the separate pieces/services which make up a product may have separate answers to these questions</strong>. For example, a website product with a backing database might have one team monitoring the health of the site and another monitoring the health of the database. This is disadvantageous, but until a DevOps methodology is fully embraced, is sometimes required. Be sure that the separation is clearly denoted in documentation.</p>
+<ul>
+<li>Who is the product team?<ul>
+<li>Who is the product owner?</li>
+<li>What roles make up the dev team and who is filling them?</li>
+<li>What other roles are dedicated to the product and who is assigned to them?</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for monitoring the product?<ul>
+<li>Monitoring includes ensuring that the product is operating within acceptable parameters and meeting SLOs.</li>
+<li>It also includes proactive examination of metrics to anticipate future problems or concerns.</li>
+<li>Monitors are responsible for raising the alarm when the product deviates, or is forecasted to deviate, from its &ldquo;green&rdquo; state.</li>
+<li>Automated monitoring is encouraged, but a human must always be available&ndash;either alongside the auto-monitoring or &ldquo;on call&rdquo;&ndash;to ensure its signals are observed and reacted to.</li>
+<li>The objective of the monitoring effort is to help ensure that the product continues to meet business needs at the real-time level.</li>
+<li>Some product types require no monitoring, for example if they are statically-delivered and &ldquo;packaged&rdquo; applications, but this is becoming rare.</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for the customer support of the product?<ul>
+<li>In other words, who engages with the consumers of the product around questions, issues, requests, and so on?</li>
+<li>This party must be assigned even when the consumer of the product is an internal audience.</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for the technical support of the product?<ul>
+<li>In other words, who can answer technical questions about the workings of the product and its components?</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for the ongoing maintenance of the product infrastructure?<ul>
+<li>These concerns include making sure database maintenance is performed, security patches are kept current, backups are valid and can be restored, log folders are cleaned, scaling is in line with demand, and so on.</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for the business alignment of the product?<ul>
+<li>Almost always, this will be the product owner. The product owner will react to the business needs and express the alignment as stories and prioritization.</li>
+<li>Sometimes, a product owner does not exist. Even in this case, some party must be responsible for ensuring that the product moves forward and aligns with direction.</li>
+<li>The objective of this effort is to help ensure that the product continues to meet business objectives at a tactical and strategic level.</li>
+</ul>
+</li>
+<li>Who is responsible/accountable for the technical upkeep and evolution (growth) of the product?<ul>
+<li>The nature of entropy dictates that over time, all applications will decay unless they continue to evolve and, at minimum, keep up with their surrounding environment.</li>
+<li>This means that someone must be responsible for ensuring that the evolution of all supported products is represented in discussions around prioritization and value.</li>
+<li>Products left untouched for long periods of time accrue technical debt simply by existing. The knowledge necessary to support and maintain the product fades over time, and eventually even minor fixes become large efforts as the code must be relearned (often by someone new).</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-importance-of-documentation">The Importance of Documentation</h2>
+<p>The original development team of a product will not always be its shepherds. Even if the product doesn&rsquo;t change hands directly, the team itself will change over time. The only way to preserve the decisions made about the product&ndash;whether during initial design, original development, or as part of on-going growth&ndash;is to document them.</p>
+<ul>
+<li>There must be a centralized location for all documentation related to the product&rsquo;s design and development.<ul>
+<li>PMO-based documentation (project submissions, etc.) are encouraged to be located here as well but not required.</li>
+<li>Confidential legal artifacts, financial artifacts, and (hopefully a very rare scenario) tightly-held company secrets should not live here.</li>
+</ul>
+</li>
+<li>Documentation shall cover technical and business decisions made, the operation of the product, dependencies, assumptions, and other intangibles.</li>
+<li>Product docs shall be available for any member of any development team within the company to view.<ul>
+<li>This allows a cross-pollination of information, removes variables around security and access (which saves Ops time), and encourages a sharing of ideas and collaboration.</li>
+<li>It also saves time when the team responsible for the product changes.</li>
+<li>There is a window during the initial design of the product where documentation can be less widely available, to avoid exposing incorrect information. However, the docs should be made available ASAP.    </li>
+</ul>
+</li>
+<li>Secrets should not live in centralized documentation.<ul>
+<li>This is especially true for passwords, authentication tokens, keys, and so on.</li>
+<li>Instead, secrets should live in a secret store (such as a key vault).</li>
+</ul>
+</li>
+<li>Documents shall be allowed to evolve and change alongside the product as necessary.<ul>
+<li>However, this evolution should happen within a change-tracked system, so that historical versions of documents can be retrieved.</li>
+<li>This requirement exists to ensure that knowledge-sharing documents are not encouraged to freeze and become outdated.</li>
+<li>An exception: documents which must freeze in order to represent authoritative or process-based finality (such as forms approved as part of project submission) are allowed to do so.</li>
+</ul>
+</li>
+<li>All currently supported versions of the product must be covered by the documentation, either within a single set or by multiple parallel sets.</li>
+</ul>
+<h1 id="product-growth">Product Growth</h1>
+<p>All products that are to be supported for any significant amount of time must continue to grow. We cannot allow products to stagnate or rot, even those products which are &ldquo;finished&rdquo;. This section discusses how products should continue to innovate and evolve over time, even if they are already providing stable business value.</p>
+<h2 id="the-importance-of-innovation">The Importance of Innovation</h2>
+<table>
+<thead>
+<tr>
+<th>Warning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This section covers philosophy and approach rather than direct requirements. It is still very important; it provides context to the requirements that come in the next section.</td>
+</tr>
+</tbody>
+</table>
+<p>Here&rsquo;s a very curt statement:</p>
+<blockquote>
+<p>A stagnant product leaves money on the table.</p>
+</blockquote>
+<p>It may be blunt, but it&rsquo;s a core philosophy of successful software companies. If you have a product you&rsquo;re still supporting/selling/distributing, letting it languish is robbing the company of potential value. It may not be literal dollars, but there are many factors contributing to &ldquo;value&rdquo; which can be represented either directly or indirectly by money.</p>
+<ul>
+<li>Actual money, in new sales contracts, add-ons, or ad-hoc purchases</li>
+<li>Expense which could have been reduced</li>
+<li>Opportunity cost</li>
+<li>Customer/user faith, trust, and interest</li>
+<li>Competitive advantage</li>
+</ul>
+<p>Like all things, software is subject to entropy. A new product is fresh and exciting, even something as simple as a development library. There is inherent momentum behind a new release. As that momentum dies down, however, users become bored and disinterested. This is one reason why you often see products like Facebook make large changes to user experience even though the existing one worked &ldquo;just fine&rdquo;&ndash;change keeps the momentum going. It keeps users engaged and gives you the opportunity to introduce new features and functionality which might lead to greater value. </p>
+<p>It&rsquo;s reasonable to react to this philosophy with some negativity. <em>&ldquo;Why make changes to a product which is bringing value and risk bringing less value?&rdquo;</em> There is some validity to this reaction, certainly. Not all markets react the same way to stagnant products. However, a stagnant product&rsquo;s value often has a peculiar curve, as demonstrated by this rough graph.</p>
+<p><img alt="Product Value centered" src="../images/product-value.png" /></p>
+<p>Post-release, the product&rsquo;s value skyrockets to its peak after a warm-up period. From there, without any further releases, the value holds briefly before beginning to taper off. Eventually, the value will near zero. Obviously, this is not hard data based on any particular case study; it&rsquo;s an abstraction of the philosophy. Most products will deviate from this on the micro level, but at the macro level, experience holds this to be accurate more often than not.</p>
+<p>On the other hand, here&rsquo;s the product&rsquo;s value with additional releases that bring new functionality, a refreshed user experience, or even (less sustainably) important bug fixes.</p>
+<p><img alt="Product Value with Releases centered" src="../images/product-value-releases.png" /></p>
+<p>Again, these graphs are not hard data, but this approach has been proven time and again by various companies. Innovation is its own value, and often holds the key to unlocking the long-term potential of the product.</p>
+<h2 id="the-importance-of-evolution">The Importance of Evolution</h2>
+<p>A central part of product ownership is being committed to its technical advancement and upkeep. Innovation is very important, but tacking new features onto a product without keeping the underlying infrastructure and technology up-to-date is like adding rooms onto your house when the foundation is cracking. You might be successful at first, but without addressing the underlying issue, the house is doomed. The importance of evolution is to not just patch up the foundation as it starts to fall apart, but to proactively improve and enhance it so that you can more easily innovate.</p>
+<p>Perhaps a more familiar metaphor is <em>technical debt</em>. Through sheer entropy, code left unimproved for long periods of time will accrue debt. Quick fixes and hasty bolt-ons will act as loans, creating more debt. Eventually, if you don&rsquo;t pay it down, it will begin to compound on itself until the burden of it is too much to repay. Often, you&rsquo;re left with what seems like only a single option: technical bankruptcy.</p>
+<p><img alt="Cycle of Technical Bankruptcy centered" src="../images/cycle-of-technical-bankruptcy.png" /></p>
+<p>To help ensure our products don&rsquo;t fall into this cycle, there are a few basic requirements. These apply to both product owners and to product teams. Some are common sense, while others may seem a little extreme. Just remember that one of the primary ways Engineering can help the business grow is through innovation, and that innovation is much cheaper and easier when the foundation stays strong.</p>
+<h3 id="evolution-requirements">Evolution Requirements</h3>
+<p>Advancing and upkeeping a product comes in various forms. Redesign, re-architecture, and refactoring are the most common varieties of evolution. These are technical challenges to be overcome. However, product owners and stakeholders have responsibilities here as well: reevaluation (of business value and direction) and revision (of product roadmap). You may have heard it said that refactoring isn&rsquo;t worthwhile, and therefore assume none of these efforts are beneficial. This is 100% false. These efforts can be incredibly lucrative, so long as they are focused on bringing additional value to the business. In other words, refactoring for the sake of it has no value; refactoring to pay off technical debt or increase speed to ROI is incredibly worthy.</p>
+<p>These are the requirements of all products:</p>
+<ul>
+<li><em>&ldquo;When in Rome&rdquo;</em> only applies to code style differences, not to design and architecture. Efforts made in existing modules should attempt to bring them up to current standards.<ul>
+<li>An example of a code style difference where <em>&ldquo;When in Rome&rdquo;</em> can apply: using <code>ALL_CAPS</code> convention for constants in C# code instead of <code>PascalCase</code>.</li>
+<li>An example of a design difference that should be corrected: logging to file when the standard is to log to <code>stdout</code>/<code>stderr</code> and allow a log aggregator to collect them.<ul>
+<li>In this example, value is brought not just by reducing maintenance costs (in reducing the number of code paths that must be supported), but also in unifying logging. This makes solving issues easier, as the logs are more accessible and discoverable.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Prioritize evolution efforts by value, and be able to identify the value of each decision.<ul>
+<li>If you cannot articulate the value, it may not be worth doing.</li>
+</ul>
+</li>
+<li>The product team should prefer to <a href="http://www.extremeprogramming.org/rules/refactor.html">refactor mercilessly</a> in place rather than take on large, risky, discrete refactoring efforts.</li>
+<li>The product team must be empowered to pay down technical debt.<ul>
+<li>Product owners must recognize the value of evolution and should allow for it to be planned as part of feature design, or, where necessary, as discrete tasks.</li>
+<li>It is always cheaper, from an expense and opportunity perspective, to pay down debt ASAP.</li>
+<li>Ultimately, however, the product owner makes the call on how the product should align with business objectives, as reflected in their decisions managing the backlog.<ul>
+<li>Or, to put it in layman&rsquo;s terms, sometimes evolution will be deprioritized for innovation, and that&rsquo;s fine. Technical debt is like financial debt: it can be paid off with little additional cost if well-managed. It only becomes a problem when the debt spirals out of control.</li>
+<li>However, if the debt does spiral out of control, it represents a huge loss of value for the company. The company&rsquo;s technical stakeholders will hold accountable anyone (including themselves) whose actions lead to out-of-control technical debt or technical bankruptcy.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The product team (including the product owner) shall keep technical debt well-managed.</li>
+<li>Products shall be reviewed annually by an interest group to evaluate the design, infrastructural, and architectural state of the product. <ul>
+<li>The objective of this review shall be:<ul>
+<li>To assess technical debt </li>
+<li>To determine what actions need to be taken to rectify issues and improve foundations over the next year</li>
+<li>To realign the technology with business goals/direction</li>
+<li>To drive adoption of supported/platform technology and (sustainable) growth</li>
+</ul>
+</li>
+<li>The interest group must include (or include representatives from):<ul>
+<li>Director over the product</li>
+<li>Product owner</li>
+<li>Product team lead and/or technical lead</li>
+<li>Ops</li>
+<li>Data Architecture</li>
+<li>Architecture</li>
+</ul>
+</li>
+<li>The review must occur early enough to allow for budgeting changes as a response to the outcome of the review.</li>
+</ul>
+</li>
+<li>So long as a product is supported and maintained, it must follow these requirements. <ul>
+<li>Products can be excepted from evolution requirements <em>only</em> when they have a corresponding end-of-life plan that has been published to consumers, and that plan ends within the next year.</li>
+<li>A product with a long-term EOL plan (as most Operating Systems have, for example) is not exempt.</li>
+<li>The reasoning for this requirement is to ensure that an active product is not left to collect technical debt that will get out of control before it is retired.</li>
+</ul>
+</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>Hopefully, the requirements here are self-explanatory and self-evident. Most of the time, they come naturally from approaching a project in good faith. Either way, following them will help us ensure that we not only produce the best possible software, but also continue to keep it well-maintained and innovative well into the future. </p>
+<p>If you have any questions about items in this document, please reach out to a lead or to the Architecture team.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

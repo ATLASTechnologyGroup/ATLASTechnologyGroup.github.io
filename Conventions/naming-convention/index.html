@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Naming Conventions - Eng. Documentation</title>
+        <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <link href="../../css/extra.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../..">Eng. Documentation</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="../..">Index</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Conventions <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../api-convention/">API Design Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../coding-convention/">C# Coding Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../docker-and-k8s-conventions/">Docker and Kubernetes Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../examples-constructor/">Constructor Parameter Examples</a>
+</li>
+                                    
+<li >
+    <a href="../examples-readonly-property/">Readonly Property</a>
+</li>
+                                    
+<li class="active">
+    <a href="./">Naming Conventions</a>
+</li>
+                                    
+<li >
+    <a href="../python-coding-conventions/">Python Coding Conventions</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Misc <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Misc/configure-workstation-aks/">Steps to Configure Workstation for Azure Kubernetes (AKS)</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/distributed-architecture-strategy/">Distributed Architecture Strategy</a>
+</li>
+                                    
+<li >
+    <a href="../../Misc/kubernetes-deployment-guidelines/">Kubernetes Deployment Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li >
+    <a href="../../Projects/database-and-schema-design-guidelines/">Database and Schema Design Guidelines</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/product-lifecycle-requirements/">Product Lifecycle Requirements</a>
+</li>
+                                    
+<li >
+    <a href="../../Projects/project-technical-guidelines/">Project Technical Design Guidelines</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../examples-readonly-property/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../python-coding-conventions/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#naming-conventions">Naming Conventions</a></li>
+            <li><a href="#repository-naming-conventions">Repository Naming Conventions</a></li>
+            <li><a href="#solution-naming-conventions">Solution Naming Conventions</a></li>
+            <li><a href="#module-naming-conventions">Module Naming Conventions</a></li>
+            <li><a href="#code-object-and-variable-naming-conventions">Code Object and Variable Naming Conventions</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="naming-conventions">Naming Conventions</h1>
+<p>To keep things consistent across various efforts and systems, a convention for the naming of various identifiers is important. This document lays them out clearly, by identifier type.</p>
+<h2 id="repository-naming-conventions">Repository Naming Conventions</h2>
+<p>Naming the repositories under a DevOps project has no explicit conventions. Instead, a requirement is that a convention be set by the project team(s). The decided convention should result in names that are consistent and concise.</p>
+<h2 id="solution-naming-conventions">Solution Naming Conventions</h2>
+<p>A &ldquo;solution&rdquo; here refers not just to Visual Studio solutions (<code>.sln</code>) but to any IDE/language environment where several modules are encapsulated by a single container. </p>
+<p>The naming convention for these containers is straightforward: <code>&lt;project-name&gt;.&lt;component-name&gt;</code>. The <code>component-name</code> part refers to which component in the system is represented by this collection of modules. </p>
+<p>Optionally, the company name can be prefixed as well, as in <code>&lt;company-name&gt;.&lt;project-name&gt;.&lt;component-name&gt;</code>. If selected, this should be consistent across all solutions in the entire DevOps project (even across repos).</p>
+<p>Some examples:</p>
+<ul>
+<li><code>Atlas.AlertingStudio.AuthAPI</code></li>
+<li><code>SelfServiceStudio.SchemaManagement</code></li>
+</ul>
+<p>Often, in more microservice-oriented systems, solutions will have fewer modules within them, which reduces the need for broadly applicable names that identify an entire component of a system.</p>
+<h2 id="module-naming-conventions">Module Naming Conventions</h2>
+<p>When naming modules, use a convention similar to naming solutions: <code>&lt;project-name&gt;.&lt;component-name&gt;.&lt;module-name&gt;</code>. Again, company name can be prefixed but should be consistent across all solutions in the DevOps project if selected.</p>
+<p>You have the following 4 types of projects:</p>
+<ul>
+<li><code>API</code> — Your interface that people use to reach your application. For a Service or Daemon you can rename this to <code>Service</code>. For example: <code>Atlas.WorkQueue.Api</code> or <code>Atlas.WorkQueue.Services</code>.</li>
+<li><code>Services</code> — This is where rubber meets the road. Some people prefer to just skip the extension, which is fine. So e.g. <code>Atlas.WorkQueue</code>.</li>
+<li><code>Data</code> — This is where your interface to data persistence lives. If you&rsquo;re using an http restful endpoint or whatever it&rsquo;s all the same; data is data, regardless of source.</li>
+<li><code>Contracts</code> — This is where your interfaces, POCOs, and other shareable pieces live. Should take ZERO dependencies on anything that isn&rsquo;t provided by the framework.</li>
+<li><code>Tests</code> — Tests.</li>
+</ul>
+<p>Use these to help inform the names of your modules. Examples:</p>
+<ul>
+<li><code>Atlas.AlertingStudio.AuthAPI.Service</code></li>
+<li><code>SelfServiceStudio.SchemaManagement.Contracts</code></li>
+<li><code>Atlas.AlertingStudio.AuthAPI.Tests</code></li>
+</ul>
+<h3 id="anti-patterns-in-module-naming">Anti-Patterns in Module Naming</h3>
+<p><strong>DO NOT</strong> name your module any of the following:</p>
+<ul>
+<li><code>Helper</code> or variations<ul>
+<li>Frequently, helper classes are used as shortcuts or patches to smooth over problems with application structure.</li>
+<li>Additionally, calling something a &ldquo;helper&rdquo; doesn&rsquo;t provide any detail as to <em>what</em> the module is helping with and what that &ldquo;help&rdquo; is meant to achieve.</li>
+</ul>
+</li>
+<li><code>Utilities</code> or variations<ul>
+<li>These are almost always static classes whose names provide no documentation of intent.</li>
+<li>Very often, they indicate a failure to perform proper dependency injection, as taking a hard dependency on a static class goes against the principle of inversion of control.</li>
+</ul>
+</li>
+<li><code>Shared</code> or variations<ul>
+<li>For example, naming a module <code>SharedLib</code> does nothing to imply the purpose of the module.</li>
+<li>Why is it being shared? What does it provide?</li>
+<li>Often, modules with names like these are being used to patch over separation of concerns issues by incorrectly or inappropriately sharing code between other modules.</li>
+</ul>
+</li>
+</ul>
+<p>Usage of these names almost always indicates a failure in design, as referenced in the sub-points above.</p>
+<h2 id="code-object-and-variable-naming-conventions">Code Object and Variable Naming Conventions</h2>
+<p>These will differ between various programming languages. However, avoid certain patterns such as:</p>
+<ul>
+<li>Hungarian notation</li>
+<li>Other type-prefixed or postfixed names<ul>
+<li>Identifiers should indicate intent/purpose, not language semantics, unless their purpose is specifically related to language semantics (e.g. <code>ConvertRowToTuple&lt;T&gt;()</code>).</li>
+</ul>
+</li>
+<li>Single-letter names, or heavily abbreviated identifiers<ul>
+<li>Code is meant to be readable by humans</li>
+</ul>
+</li>
+</ul>
+<p>C# conventions can be found <a href="../coding-convention/">here</a>.</p>
+<p>Python conventions can be found <a href="../python-coding-conventions/">here</a>.</p>
+<p>For languages that do not have explicit conventions, follow general guidelines laid out here and reach out to your team lead(s) for more information and to create a convention.</p>
+<h3 id="anti-patterns-in-object-naming">Anti-Patterns in Object Naming</h3>
+<p>All of the rules that apply to <a href="#anti-patterns-in-module-naming">module naming</a> apply here as well.</p></div>
+        </div>
+
+        <footer class="col-md-12">
+    <hr />
+    <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>. <br/><small>Site last generated: 2022-07-07 15:34:55 (UTC)</small></p>
+
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
